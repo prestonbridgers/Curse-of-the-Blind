@@ -5,11 +5,11 @@
 
 #include "player.h"
 #include "map.h"
+#include "event.h"
 
 // Function prototypes
 void menu_screen();
 void refresh_stat(WINDOW *local_win, int local_h, int local_w);
-
 
 /*
  *
@@ -53,17 +53,9 @@ int main(int argc, char *argv[])
 	char in;
 	while (game_running)
 	{
-		in = getch();
-
-		switch (in)
-		{
-			case 'm': //Menu
-				menu_screen();
-				break;
-			case 'q': //Quit
-				game_running = 0;
-				break;
-		}
+		if ((in = getch()) == 'q')
+			break;
+		event_handle(m, in);
 
 		// TODO: Get all this into a single update() function
 		refresh_stat(stat_win, stat_height, stat_width);
