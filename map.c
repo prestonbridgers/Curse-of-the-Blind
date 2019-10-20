@@ -10,13 +10,13 @@
  * in the given map.
  *
  */
-struct map *map_load(char *filename)
+struct MAP *map_load(char *filename)
 {
 
 	// Vars
 	struct player *local_player;
 	int playerx, playery;
-	struct map *local_map = malloc(sizeof(struct map));
+	struct MAP *local_map = malloc(sizeof(struct MAP));
 	local_map->height = 0;
 	local_map->width = 0;
 	FILE *map_fd = fopen(filename, "r");
@@ -72,10 +72,12 @@ struct map *map_load(char *filename)
  * Frees memory associated with given map data structure.
  *
  */
-void map_destroy(struct map *local_map)
+void map_destroy(struct MAP_WIN *mw)
 {
-	player_destroy(local_map->pc);
-	free(local_map);
+	free(mw->map->pc);
+	free(mw->map);
+	delwin(mw->win);
+	free(mw);
 }
 
 /*
@@ -83,52 +85,34 @@ void map_destroy(struct map *local_map)
  * nCurses wrapper function to create a new window in
  * association with a given map.
  *
- * If it is assumed that the map window will always be
- * in the center of the screen, starty and startx could
- * be calculated inside of this function. This isn't an
- * assumption I want to make for now.
- *
  */
-WINDOW *map_newwin(struct map *local_map, int starty, int startx)
+struct MAP_WIN *map_newwin(char *filename)
 {
-	// Making the nCurses window data structure
+	struct MAP_WIN *local_mapwin = malloc(sizeof(struct MAP_WIN));
+	struct MAP *local_map = map_load(filename);
+
+	int starty = (LINES - local_map->height) / 2;
+	int startx = (COLS - local_map->width) / 2;
 	WINDOW *local_win = newwin(local_map->height + 2, local_map->width + 2, starty, startx);
 
-	// Drawing the map data to the window.
-	box(local_win, 0, 0);
-	for (int i = 0; i < local_map->height; i++)
-	{
-		for (int j = 0; j < local_map->width; j++)
-		{
-			if (i == local_map->pc->ypos && j == local_map->pc->xpos)
-			{
-				mvwaddch(local_win, i + 1, j + 1, '@');
-			}
-			else
-			{
-				mvwaddch(local_win, i + 1, j + 1, local_map->data[i][j]);
-			}
-		}
-	}
+	local_mapwin->map = local_map;
+	local_mapwin->win = local_win;
 
-	// Drawing the window to the screen (not sure if this
-	// is the best place for this function call)
-	wrefresh(local_win);
-	return local_win;
+	return local_mapwin;
 }
 
-void map_update(struct map *local_map, WINDOW *local_win)
+void map_show(struct MAP_WIN *mw)
 {
-	box(local_win, 0, 0);
-	for (int i = 0; i < local_map->height; i++)
+	box(mw->win, 0, 0);
+	for (int i = 0; i < mw->map->height; i++)
 	{
-		for (int j = 0; j < local_map->width; j++)
+		for (int j = 0; j < mw->map->width; j++)
 		{
-			if (i == local_map->pc->ypos && j == local_map->pc->xpos)
-				mvwaddch(local_win, i + 1, j + 1, '@');
+			if (i == mw->map->pc->ypos && j == mw->map->pc->xpos)
+				mvwaddch(mw->win, i + 1, j + 1, '@');
 			else
-				mvwaddch(local_win, i + 1, j + 1, local_map->data[i][j]);
+				mvwaddch(mw->win, i + 1, j + 1, mw->map->data[i][j]);
 		}
 	}
-	wrefresh(local_win);
+	wrefresh(mw->win);
 }

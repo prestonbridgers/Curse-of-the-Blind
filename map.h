@@ -4,7 +4,7 @@
 #include <ncurses.h>
 #include "player.h"
 
-struct map
+struct MAP
 {
 	char **data;
 	int height;
@@ -12,9 +12,14 @@ struct map
 	struct player *pc;
 };
 
-struct map *map_load(char *filename);
-void map_destroy(struct map *local_map);
-WINDOW *map_newwin(struct map *local_map, int starty, int startx);
-void map_update(struct map *local_map, WINDOW *local_win);
+struct MAP_WIN
+{
+	struct MAP *map;
+	WINDOW *win;
+};
+
+struct MAP_WIN *map_newwin(char *filename);
+void map_destroy(struct MAP_WIN *mw);
+void map_show(struct MAP_WIN *mw);
 
 #endif

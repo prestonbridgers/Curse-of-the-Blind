@@ -26,9 +26,14 @@
 //  \__, |\__,_|_| |_| |_|\___||___/ |_.__/ \___/|_|___/
 //  |___/                                               
 
+struct GAME
+{
+	struct MAP_WIN *map_win;
+	int is_running;
+};
+
 // Function prototypes
 void menu_screen();
-void refresh_stat(WINDOW *local_win, int local_h, int local_w);
 
 /*
  *
@@ -54,38 +59,25 @@ int main(int argc, char *argv[])
 	refresh();
 
 	// Vars
-	short game_running = 1;
-
-	struct map *m = map_load("map.txt");
-	int map_starty = (LINES - m->height) / 2;
-	int map_startx = (COLS - m->width) / 2;
-	WINDOW *map_win = map_newwin(m, map_starty, map_startx);
-
-	int stat_height = 4;
-	int stat_width = 61;
-	int stat_startx = map_startx;
-	int stat_starty = map_starty - stat_height;
-	WINDOW *stat_win = newwin(stat_height, stat_width, stat_starty, stat_startx);
-	refresh_stat(stat_win, stat_height, stat_width);
+	struct GAME *game = malloc(sizeof(struct GAME));
+	game->map_win = map_newwin("map.txt");
+	game->is_running = 1;
+	map_show(game->map_win);
 
 	// GAME LOOP
 	char in;
-	while (game_running)
+	while (game->is_running)
 	{
 		if ((in = getch()) == 'q')
-			break;
+			game->is_running = 0;
 		else if (in == 'm')
 			menu_screen();
-		event_handle(m, in);
 
-		// TODO: Get all this into a single update() function
-		map_update(m, map_win);
-		refresh_stat(stat_win, stat_height, stat_width);
+		map_show(game->map_win);
 	}
 
 	// Free memory and cleanup
-	map_destroy(m);
-	delwin(map_win);
+	map_destroy(game->map_win);
 	endwin();
 	return 0;
 }
@@ -135,22 +127,3 @@ void menu_screen()
 	// Rip window after we're done.
 	delwin(menu_win);
 }
-
-/*
- *
- * This is a function that I need to tuck
- * away in its own source file with many other
- * utility functions to update/redraw windows.
- * I plan on having one big update() function
- * call to wrap all the redraw functions into.
- * It's here for now though, so I get to look
- * at it in all of its glory.
- *
- */
-void refresh_stat(WINDOW *local_win, int local_h, int local_w)
-{
-	box(local_win, 0, 0);
-	mvwprintw(local_win, 1, 1, "Player: {name} the {class?}\t\tatk: {attack stat}");
-	mvwprintw(local_win, 2, 1, "Race: {race?}\t\t\t\tdef: {defense stat}");
-	wrefresh(local_win);
-}	
