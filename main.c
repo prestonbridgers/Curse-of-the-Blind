@@ -34,6 +34,7 @@ struct GAME
 
 // Function prototypes
 void menu_screen();
+void event_handle(struct GAME *g, char input);
 
 /*
  *
@@ -72,6 +73,8 @@ int main(int argc, char *argv[])
 			game->is_running = 0;
 		else if (in == 'm')
 			menu_screen();
+		else
+			event_handle(game, in);
 
 		map_show(game->map_win);
 	}
@@ -126,4 +129,24 @@ void menu_screen()
 
 	// Rip window after we're done.
 	delwin(menu_win);
+}
+
+
+void event_handle(struct GAME *g, char input)
+{
+	switch (input)
+	{
+		case 'w':
+			g->map_win->map->pc->ypos--;
+			break;
+		case 's':
+			g->map_win->map->pc->ypos++;
+			break;
+		case 'a':
+			g->map_win->map->pc->xpos--;
+			break;
+		case 'd':
+			g->map_win->map->pc->xpos++;
+			break;
+	}
 }
