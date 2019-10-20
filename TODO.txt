@@ -1,2 +1,0 @@
-- Make a txt file parser and standard format for reading data in to the game. (Mainly dialogue, but maybe json for other stuff later on)
-
