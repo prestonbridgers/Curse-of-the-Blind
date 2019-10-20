@@ -15,5 +15,6 @@ struct map
 struct map *map_load(char *filename);
 void map_destroy(struct map *local_map);
 WINDOW *map_newwin(struct map *local_map, int starty, int startx);
+void map_update(struct map *local_map, WINDOW *local_win);
 
 #endif

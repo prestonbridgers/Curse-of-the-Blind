@@ -15,6 +15,7 @@ struct map *map_load(char *filename)
 
 	// Vars
 	struct player *local_player;
+	int playerx, playery;
 	struct map *local_map = malloc(sizeof(struct map));
 	local_map->height = 0;
 	local_map->width = 0;
@@ -46,16 +47,19 @@ struct map *map_load(char *filename)
 			continue;
 		}
 
-		local_map->data[i][j % local_map->width] = c;
+		if (c == '@')
+		{
+			playerx = j % local_map->width;
+			playery = i;
+			local_map->data[playery][playerx] = '.';
+		}
+		else
+			local_map->data[i][j % local_map->width] = c;
 		j++;
 	}
 
-	// Finding the location of the player symbol and initializing
-	// local_player accordingly.
-	for (int i = 0; i < local_map->height; i++)
-		for (int j = 0; j < local_map->width; j++)
-			if (local_map->data[i][j] == '@')
-				local_player = player_create("TEMP", i, j);
+	// Creating the player and assigning it to the map
+	local_player = player_create("TEMP", playery, playerx);
 	local_map->pc = local_player;
 
 	// Always close files
@@ -96,7 +100,14 @@ WINDOW *map_newwin(struct map *local_map, int starty, int startx)
 	{
 		for (int j = 0; j < local_map->width; j++)
 		{
-			mvwaddch(local_win, i + 1, j + 1, local_map->data[i][j]);
+			if (i == local_map->pc->ypos && j == local_map->pc->xpos)
+			{
+				mvwaddch(local_win, i + 1, j + 1, '@');
+			}
+			else
+			{
+				mvwaddch(local_win, i + 1, j + 1, local_map->data[i][j]);
+			}
 		}
 	}
 
@@ -104,4 +115,20 @@ WINDOW *map_newwin(struct map *local_map, int starty, int startx)
 	// is the best place for this function call)
 	wrefresh(local_win);
 	return local_win;
+}
+
+void map_update(struct map *local_map, WINDOW *local_win)
+{
+	box(local_win, 0, 0);
+	for (int i = 0; i < local_map->height; i++)
+	{
+		for (int j = 0; j < local_map->width; j++)
+		{
+			if (i == local_map->pc->ypos && j == local_map->pc->xpos)
+				mvwaddch(local_win, i + 1, j + 1, '@');
+			else
+				mvwaddch(local_win, i + 1, j + 1, local_map->data[i][j]);
+		}
+	}
+	wrefresh(local_win);
 }

@@ -55,9 +55,12 @@ int main(int argc, char *argv[])
 	{
 		if ((in = getch()) == 'q')
 			break;
+		else if (in == 'm')
+			menu_screen();
 		event_handle(m, in);
 
 		// TODO: Get all this into a single update() function
+		map_update(m, map_win);
 		refresh_stat(stat_win, stat_height, stat_width);
 	}
 
@@ -100,10 +103,11 @@ void menu_screen()
 	// Menu screen input loop
 	while ((in = getch()) != '2')
 	{
+		char help_msg[] = "You need help. . . I don't know what to tell ya.";
 		switch (in)
 		{
 			case '1':
-				mvprintw(0, 0, "You need help. . . I don't konw what to tell ya.");
+				mvprintw(LINES - 1, (COLS - strlen(help_msg)) / 2, help_msg);
 				refresh();
 				break;
 		}
