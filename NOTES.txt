@@ -1,0 +1,33 @@
+How can decoupling help?:
+
+Decoupling - If two pieces of code are "coupled", it means you can't understand one without understanding the other. To "decouple" these two pieces of code means you have to think about only the one piece relevant to your problem without having to also consider the other piece. This is the same for making changes. Making changes to one piece of coupled code necessitates change in the other piece, whereas decoupled code means change to only one piece is doable without affecting the other.
+	-> You decouple code under the assumption that you will need that flexibility to make changes in the future. If you guess wrong, it just ends up being more code to deal with. In that case, decoupling does more harm than good.
+	-> YAGNI :: You aren't gonna need it
+
+Performance and Speed:
+
+Making your program more flexible so you can prototype faster will have some performance cost. Likewise, optimizing your code will make it less flexible.
+
+It’s easier to make a fun game fast than it is to make a fast game fun. One compromise is to keep the code flexible until the design settles down and then tear out some of the abstraction later to improve your performance.
+
+The good in bad Code:
+
+Prototyping - slapping together code that’s just barely functional enough to answer a design question — is a perfectly legitimate programming practice. There is a very large caveat, though. If you write throwaway code, you must ensure you’re able to throw it away.
+
+Simplicity:
+
+Blaise Pascal famously ended a letter with, “I would have written a shorter letter, but I did not have the time.”
+
+When we think of elegant solutions, what we often have in mind is a general one: a small bit of logic that still correctly covers a large space of use cases.
+
+Final Notes:
+
+Abstraction and decoupling make evolving your program faster and easier, but don’t waste time doing them unless you’re confident the code in question needs that flexibility.
+
+Think about and design for performance throughout your development cycle, but put off the low-level, nitty-gritty optimizations that lock assumptions into your code until as late as possible.
+
+Move quickly to explore your game’s design space, but don’t go so fast that you leave a mess behind you. You’ll have to live with it, after all.
+
+If you are going to ditch code, don’t waste time making it pretty. Rock stars trash hotel rooms because they know they’re going to check out the next day.
+
+if you want to make something fun, have fun making it!
