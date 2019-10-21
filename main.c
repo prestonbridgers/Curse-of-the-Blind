@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ncurses.h>
-
 #include "player.h"
 #include "map.h"
 #include "event.h"
@@ -134,19 +133,34 @@ void menu_screen()
 
 void event_handle(struct GAME *g, char input)
 {
+	int y = g->map_win->map->pc->ypos;
+	int x = g->map_win->map->pc->xpos;
+
 	switch (input)
 	{
 		case 'w':
-			g->map_win->map->pc->ypos--;
+			if (y - 1 < 0) break;
+			else if (g->map_win->map->data[y - 1][x] == '#') break;
+			else if (g->map_win->map->data[y - 1][x] == 'r') menu_screen();
+			else g->map_win->map->pc->ypos--;
 			break;
 		case 's':
-			g->map_win->map->pc->ypos++;
+			if (y + 1 > g->map_win->map->height - 1) break;
+			else if (g->map_win->map->data[y + 1][x] == '#') break;
+			else if (g->map_win->map->data[y + 1][x] == 'r') menu_screen();
+			else g->map_win->map->pc->ypos++;
 			break;
 		case 'a':
-			g->map_win->map->pc->xpos--;
+			if (x - 1 < 0) break;
+			else if (g->map_win->map->data[y][x - 1] == '#') break;
+			else if (g->map_win->map->data[y][x - 1] == 'r') menu_screen();
+			else g->map_win->map->pc->xpos--;
 			break;
 		case 'd':
-			g->map_win->map->pc->xpos++;
+			if (x + 1 > g->map_win->map->width - 1) break;
+			else if (g->map_win->map->data[y][x + 1] == '#') break;
+			else if (g->map_win->map->data[y][x + 1] == 'r') menu_screen();
+			else g->map_win->map->pc->xpos++;
 			break;
 	}
 }

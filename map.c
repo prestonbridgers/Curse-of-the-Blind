@@ -3,7 +3,6 @@
 #include <ncurses.h>
 #include "map.h"
 
-
 /*
  *
  * Loads a map from a given file. Assumes the existence of a player tile '@'
@@ -108,10 +107,30 @@ void map_show(struct MAP_WIN *mw)
 	{
 		for (int j = 0; j < mw->map->width; j++)
 		{
+			mvwaddch(mw->win, i + 1, j + 1, ' '); // Clearing the screen
+		}
+	}
+	wrefresh(mw->win);
+
+	for (int i = 0; i < mw->map->height; i++)
+	{
+		for (int j = 0; j < mw->map->width; j++)
+		{
 			if (i == mw->map->pc->ypos && j == mw->map->pc->xpos)
-				mvwaddch(mw->win, i + 1, j + 1, '@');
-			else
-				mvwaddch(mw->win, i + 1, j + 1, mw->map->data[i][j]);
+			{
+				mvwaddch(mw->win, i, j, mw->map->data[i - 1][j - 1]); // Top-left
+				mvwaddch(mw->win, i, j + 1, mw->map->data[i - 1][j]); // Top-middle
+				mvwaddch(mw->win, i, j + 2, mw->map->data[i - 1][j + 1]); // Top-right
+
+				
+				mvwaddch(mw->win, i + 1, j, mw->map->data[i][j - 1]); // Middle-left
+				mvwaddch(mw->win, i + 1, j + 1, '@'); // Character
+				mvwaddch(mw->win, i + 1, j + 2, mw->map->data[i][j + 1]); // Middle-right
+
+				mvwaddch(mw->win, i + 2, j, mw->map->data[i + 1][j - 1]); // Bot-left
+				mvwaddch(mw->win, i + 2, j + 1, mw->map->data[i + 1][j]); // Bot-middle
+				mvwaddch(mw->win, i + 2, j + 2, mw->map->data[i + 1][j + 1]); // Bot-right
+			}
 		}
 	}
 	wrefresh(mw->win);
