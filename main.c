@@ -5,6 +5,7 @@
 #include "player.h"
 #include "map.h"
 #include "event.h"
+#include "menus.h"
 
 //  _      _   _             _                                        
 // | | ___| |_( )___   _ __ | | __ _ _   _   ___  ___  _ __ ___   ___ 
@@ -32,7 +33,6 @@ struct GAME
 };
 
 // Function prototypes
-void menu_screen();
 void event_handle(struct GAME *g, char input);
 
 /*
@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
 	game->map_win = map_newwin("map.txt");
 	game->is_running = 1;
 	map_show(game->map_win);
+
+	menus_display_note("note.txt");
 
 	// GAME LOOP
 	char in;
@@ -96,39 +98,6 @@ int main(int argc, char *argv[])
  * of organization.
  *
  */
-void menu_screen()
-{
-	// Vars
-	int in;
-	int menu_height = 10;
-	int menu_width = 10;
-	int menu_startx = (COLS - menu_height) / 2;
-	int menu_starty = (LINES - menu_width) / 2;
-	WINDOW *menu_win = newwin(menu_height, menu_width, menu_starty, menu_startx);
-
-	// Writing things onto menu
-	box(menu_win, 0, 0);
-	mvwprintw(menu_win, 1, 1, "Menu:");
-	mvwprintw(menu_win, 2, 1, "1) Help");
-	mvwprintw(menu_win, 3, 1, "2) Quit");
-	wrefresh(menu_win);
-
-	// Menu screen input loop
-	while ((in = getch()) != '2')
-	{
-		char help_msg[] = "You need help. . . I don't know what to tell ya.";
-		switch (in)
-		{
-			case '1':
-				mvprintw(LINES - 1, (COLS - strlen(help_msg)) / 2, help_msg);
-				refresh();
-				break;
-		}
-	}
-
-	// Rip window after we're done.
-	delwin(menu_win);
-}
 
 
 void event_handle(struct GAME *g, char input)

@@ -1,1 +1,3 @@
-yell at gabby to write me a fucking story!
+1) Make a routine for parsing story text files and displaying them on screen in a new window much like the menu does.
+	-Autoformatting the raw text to fit in the middle of the screen.
+
