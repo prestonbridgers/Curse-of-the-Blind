@@ -1,0 +1,4 @@
+Welcome to the game.
+Movement:
+4 cardinal directions: hjkl
+4 diagonal directions: yubn

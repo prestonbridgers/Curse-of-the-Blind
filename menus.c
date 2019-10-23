@@ -5,6 +5,29 @@
 
 #include "menus.h"
 
+/*
+ *
+ *
+ *
+ */
+void menu_refresh(WINDOW *win, int h, int w)
+{
+	box(win, 0, 0);
+	for (int i = 1; i < h - 1; i++)
+		for (int j = 1; j < w - 1; j++)
+			mvwaddch(win, i, j, ' ');
+
+	mvwprintw(win, 1, 1, "Menu:");
+	mvwprintw(win, 2, 1, "1) Help");
+	mvwprintw(win, 3, 1, "2) Quit");
+	wrefresh(win);
+}
+
+/*
+ *
+ * Temporary function to generate a menu screen.
+ *
+ */
 void menu_screen()
 {
 	// Vars
@@ -16,20 +39,16 @@ void menu_screen()
 	WINDOW *menu_win = newwin(menu_height, menu_width, menu_starty, menu_startx);
 
 	// Writing things onto menu
-	box(menu_win, 0, 0);
-	mvwprintw(menu_win, 1, 1, "Menu:"); mvwprintw(menu_win, 2, 1, "1) Help");
-	mvwprintw(menu_win, 3, 1, "2) Quit");
-	wrefresh(menu_win);
+	menu_refresh(menu_win, menu_height, menu_width);
 
 	// Menu screen input loop
 	while ((in = getch()) != '2')
 	{
-		char help_msg[] = "You need help. . . I don't know what to tell ya.";
 		switch (in)
 		{
 			case '1':
-				mvprintw(LINES - 1, (COLS - strlen(help_msg)) / 2, help_msg);
-				refresh();
+				menus_display_note("help.txt");
+				menu_refresh(menu_win, menu_height, menu_width);
 				break;
 		}
 	}
@@ -38,6 +57,13 @@ void menu_screen()
 	delwin(menu_win);
 }
 
+/*
+ *
+ * Helper function for the display_note function below.
+ * Extracts raw text form a file and returns a string
+ * containing the text.
+ *
+ */
 char *load_text(char *filename)
 {
 	FILE *f = fopen(filename, "r");
@@ -64,6 +90,13 @@ char *load_text(char *filename)
 	return data;
 }
 
+/*
+ *
+ * Reads text in from a file and displays it on a window
+ * to the user. Waits for a key to be pressed, then deletes
+ * the window.
+ *
+ */
 void menus_display_note(char *filename)
 {
 	WINDOW *win;
@@ -85,18 +118,17 @@ void menus_display_note(char *filename)
 	win = newwin(win_height, win_width, win_starty, win_startx);
 
 	box(win, 0, 0);
-	// TODO: Each line there is a 7 char offset for some reason.
 	for (int i = 1; i < win_height - 1; i++)
 	{
 		for (int j = 1; j < win_width - 1; j++)
 		{
-			int msg_i = (i - 1) * win_height + (j - 1);
+			int msg_i = (i - 1) * (win_width - 2) + (j - 1);
 			if (msg_i < len)
 				mvwaddch(win, i, j, msg[msg_i]);
 		}
 	}
 
 	wrefresh(win);
-	refresh();
+	getch();
 	delwin(win);
 }

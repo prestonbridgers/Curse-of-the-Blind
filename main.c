@@ -12,8 +12,7 @@
 // | |/ _ \ __|// __| | '_ \| |/ _` | | | | / __|/ _ \| '_ ` _ \ / _ \
 // | |  __/ |_  \__ \ | |_) | | (_| | |_| | \__ \ (_) | | | | | |  __/
 // |_|\___|\__| |___/ | .__/|_|\__,_|\__, | |___/\___/|_| |_| |_|\___|
-//                    |_|            |___/                            
-//   __            _    _                     _     _            
+//                    |_|            |___/                            //   __            _    _                     _     _            
 //  / _|_   _  ___| | _(_)_ __   __ _  __   _(_) __| | ___  ___  
 // | |_| | | |/ __| |/ / | '_ \ / _` | \ \ / / |/ _` |/ _ \/ _ \
 // |  _| |_| | (__|   <| | | | | (_| |  \ V /| | (_| |  __/ (_) |
@@ -64,7 +63,6 @@ int main(int argc, char *argv[])
 	game->is_running = 1;
 	map_show(game->map_win);
 
-	menus_display_note("note.txt");
 
 	// GAME LOOP
 	char in;
@@ -86,20 +84,6 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-/*
- *
- * This function handles the "menu screen".
- * Idk why this is even a thing that exists.
- * It was really just to show proof of concept
- * that menus are a thing that I can do with
- * this library. I'll probably seperating
- * all the menus and UI stuff into a 
- * seperate source file for the sake
- * of organization.
- *
- */
-
-
 void event_handle(struct GAME *g, char input)
 {
 	int y = g->map_win->map->pc->ypos;
@@ -107,29 +91,69 @@ void event_handle(struct GAME *g, char input)
 
 	switch (input)
 	{
-		case 'w':
+		case 'k': // up
 			if (y - 1 < 0) break;
 			else if (g->map_win->map->data[y - 1][x] == '#') break;
-			else if (g->map_win->map->data[y - 1][x] == 'r') menu_screen();
+			else if (g->map_win->map->data[y - 1][x] == 'T') menus_display_note("note.txt");
 			else g->map_win->map->pc->ypos--;
 			break;
-		case 's':
+		case 'j': // down
 			if (y + 1 > g->map_win->map->height - 1) break;
 			else if (g->map_win->map->data[y + 1][x] == '#') break;
-			else if (g->map_win->map->data[y + 1][x] == 'r') menu_screen();
+			else if (g->map_win->map->data[y + 1][x] == 'T') menus_display_note("note.txt");
 			else g->map_win->map->pc->ypos++;
 			break;
-		case 'a':
+		case 'h': // left
 			if (x - 1 < 0) break;
 			else if (g->map_win->map->data[y][x - 1] == '#') break;
-			else if (g->map_win->map->data[y][x - 1] == 'r') menu_screen();
+			else if (g->map_win->map->data[y][x - 1] == 'T') menus_display_note("note.txt");
 			else g->map_win->map->pc->xpos--;
 			break;
-		case 'd':
+		case 'l': // right
 			if (x + 1 > g->map_win->map->width - 1) break;
 			else if (g->map_win->map->data[y][x + 1] == '#') break;
-			else if (g->map_win->map->data[y][x + 1] == 'r') menu_screen();
+			else if (g->map_win->map->data[y][x + 1] == 'T') menus_display_note("note.txt");
 			else g->map_win->map->pc->xpos++;
+			break;
+		case 'y': // up-left
+			if (x - 1 < 0 && y - 1 < 0) break;
+			else if (g->map_win->map->data[y - 1][x - 1] == '#') break;
+			else if (g->map_win->map->data[y - 1][x - 1] == 'T') menus_display_note("note.txt");
+			else 
+			{
+				g->map_win->map->pc->xpos--;
+				g->map_win->map->pc->ypos--;
+			}
+			break;
+		case 'u': // up-right
+			if (x + 1 < 0 && y - 1 < 0) break;
+			else if (g->map_win->map->data[y - 1][x + 1] == '#') break;
+			else if (g->map_win->map->data[y - 1][x + 1] == 'T') menus_display_note("note.txt");
+			else 
+			{
+				g->map_win->map->pc->xpos++;
+				g->map_win->map->pc->ypos--;
+			}
+			break;
+		case 'b': // down-left
+			if (x - 1 < 0 && y + 1 < 0) break;
+			else if (g->map_win->map->data[y + 1][x - 1] == '#') break;
+			else if (g->map_win->map->data[y + 1][x - 1] == 'T') menus_display_note("note.txt");
+			else 
+			{
+				g->map_win->map->pc->xpos--;
+				g->map_win->map->pc->ypos++;
+			}
+			break;
+		case 'n': // down-right
+			if (x + 1 < 0 && y + 1 < 0) break;
+			else if (g->map_win->map->data[y + 1][x + 1] == '#') break;
+			else if (g->map_win->map->data[y + 1][x + 1] == 'T') menus_display_note("note.txt");
+			else 
+			{
+				g->map_win->map->pc->xpos++;
+				g->map_win->map->pc->ypos++;
+			}
 			break;
 	}
 }
