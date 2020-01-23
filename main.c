@@ -3,10 +3,12 @@
 #include <string.h>
 #include <ncurses.h>
 #include <unistd.h>
+
 #include "player.h"
 #include "map.h"
 #include "event.h"
 #include "menus.h"
+#include "game.h"
 
 //  _      _   _             _                                        
 // | | ___| |_( )___   _ __ | | __ _ _   _   ___  ___  _ __ ___   ___ 
@@ -27,11 +29,6 @@
 //  \__, |\__,_|_| |_| |_|\___||___/ |_.__/ \___/|_|___/
 //  |___/                                               
 
-struct GAME
-{
-	struct MAP_WIN *map_win;
-	int is_running;
-};
 
 // Function prototypes
 void event_handle(struct GAME *g, char input);

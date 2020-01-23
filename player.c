@@ -29,3 +29,11 @@ void player_destroy(struct player *local_player)
 {
 	free(local_player);
 }
+
+void player_notify(struct GAME *g, char c)
+{
+	// Run through the list of systems
+	// that are observing the player
+	// and notify them of the character
+	// that was just pressed
+}
