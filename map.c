@@ -13,7 +13,7 @@ struct MAP *map_load(char *filename)
 {
 
 	// Vars
-	struct player *local_player;
+	struct PLAYER *local_player;
 	int playerx, playery;
 	struct MAP *local_map = malloc(sizeof(struct MAP));
 	local_map->height = 0;
@@ -58,7 +58,7 @@ struct MAP *map_load(char *filename)
 	}
 
 	// Creating the player and assigning it to the map
-	local_player = player_create("TEMP", playery, playerx);
+	local_player = player_create(playery, playerx);
 	local_map->pc = local_player;
 
 	// Always close files
@@ -116,7 +116,7 @@ void map_show(struct MAP_WIN *mw)
 	{
 		for (int j = 0; j < mw->map->width; j++)
 		{
-			if (i == mw->map->pc->ypos && j == mw->map->pc->xpos)
+			if (i == mw->map->pc->y && j == mw->map->pc->x)
 			{
 				mvwaddch(mw->win, i, j, mw->map->data[i - 1][j - 1]); // Top-left
 				mvwaddch(mw->win, i, j + 1, mw->map->data[i - 1][j]); // Top-middle

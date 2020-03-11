@@ -9,7 +9,7 @@ struct MAP
 	char **data;
 	int height;
 	int width;
-	struct player *pc;
+	struct PLAYER *pc;
 };
 
 struct MAP_WIN

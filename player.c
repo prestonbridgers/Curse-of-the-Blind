@@ -3,19 +3,15 @@
 
 /*
  *
- * Creates a player data structure given a
- * name and initial xy coordinates.
- *
- * Name is currently useless, but who cares?
- * Everyone needs a name.
+ * Creates a player data structure
+ * given initial xy coordinates.
  *
  */
-struct player *player_create(char *local_name, int y, int x)
+struct PLAYER *player_create(int y, int x)
 {
-	struct player *local_player = malloc(sizeof(struct player));
-	local_player->name = local_name;
-	local_player->xpos = x;
-	local_player->ypos = y;
+	struct PLAYER *local_player = malloc(sizeof(struct PLAYER));
+	local_player->x = x;
+	local_player->y = y;
 	return local_player;
 }
 
@@ -25,15 +21,8 @@ struct player *player_create(char *local_name, int y, int x)
  * player data structure.
  *
  */
-void player_destroy(struct player *local_player)
+void player_destroy(struct PLAYER *local_player)
 {
 	free(local_player);
 }
 
-void player_notify(struct GAME *g, char c)
-{
-	// Run through the list of systems
-	// that are observing the player
-	// and notify them of the character
-	// that was just pressed
-}

@@ -3,15 +3,14 @@
 
 #include "game.h"
 
-struct player
+struct PLAYER
 {
-	int xpos;
-	int ypos;
-	char *name;
+	int x;
+	int y;
 };
 
-struct player *player_create(char *local_name, int y, int x);
-void player_destroy(struct player *local_player);
+struct PLAYER *player_create(int y, int x);
+void player_destroy(struct PLAYER *local_player);
 void player_event(struct GAME *g, char c);
 
 #endif

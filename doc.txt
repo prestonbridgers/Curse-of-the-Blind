@@ -20,7 +20,7 @@ MAP: (map.h)
 	char **data;
 	int height;
 	int width;
-	struct player *pc; // TODO: Possible rewrite
+	struct PLAYER *pc; // TODO: Possible rewrite (DONE)
 
 /*
  * Essentially ties a map to a nCurses Window
@@ -30,13 +30,11 @@ MAP_WIN: (map.h)
 	Window *win;
 
 /*
- * Player data, TODO: Probably rename this to PLAYER to
- * maintain consistency.
+ * Player data
  */
-player: (player.h)
-	int xpos;   // TODO: Probably rename these x and y
-	int ypos;
-	char *name; // TODO: Probably axe this
+PLAYER: (player.h)
+	int x;
+	int y;
 
 
 
