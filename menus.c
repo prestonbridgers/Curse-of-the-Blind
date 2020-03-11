@@ -7,58 +7,6 @@
 
 /*
  *
- *
- *
- */
-void menu_refresh(WINDOW *win, int h, int w)
-{
-	box(win, 0, 0);
-	for (int i = 1; i < h - 1; i++)
-		for (int j = 1; j < w - 1; j++)
-			mvwaddch(win, i, j, ' ');
-
-	mvwprintw(win, 1, 1, "Menu:");
-	mvwprintw(win, 2, 1, "1) Help");
-	mvwprintw(win, 3, 1, "2) Quit");
-	wrefresh(win);
-}
-
-/*
- *
- * Temporary function to generate a menu screen.
- *
- */
-void menu_screen()
-{
-	// Vars
-	int in;
-	int menu_height = 10;
-	int menu_width = 10;
-	int menu_startx = (COLS - menu_height) / 2;
-	int menu_starty = (LINES - menu_width) / 2;
-	WINDOW *menu_win = newwin(menu_height, menu_width, menu_starty, menu_startx);
-
-	// Writing things onto menu
-	menu_refresh(menu_win, menu_height, menu_width);
-
-	// Menu screen input loop
-	while ((in = getch()) != '2')
-	{
-		switch (in)
-		{
-			case '1':
-				menus_display_note("help.txt");
-				menu_refresh(menu_win, menu_height, menu_width);
-				break;
-		}
-	}
-
-	// Rip window after we're done.
-	delwin(menu_win);
-}
-
-/*
- *
  * Helper function for the display_note function below.
  * Extracts raw text form a file and returns a string
  * containing the text.

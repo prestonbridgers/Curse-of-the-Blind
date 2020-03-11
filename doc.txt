@@ -4,11 +4,9 @@
 #
 ##########################################
 
-/*
- * Not entirely sure this is necessary
- */
 GAME: (game.h)
 	struct MAP_WIN *map_win;
+	struct PLAYER *plr;
 	int is_running;
 
 /*
@@ -20,7 +18,6 @@ MAP: (map.h)
 	char **data;
 	int height;
 	int width;
-	struct PLAYER *pc; // TODO: Possible rewrite (DONE)
 
 /*
  * Essentially ties a map to a nCurses Window
@@ -36,19 +33,22 @@ PLAYER: (player.h)
 	int x;
 	int y;
 
-
-
 ##########################################
 #
-# 
+#          WTF Why?
 #
 ##########################################
 
+Player creation (init) is happening
+when you load a map? Fix that.
+
 ##########################################
 #
-#
+#           TODO
 #
 ##########################################
+
+Fix input/event handling
 
 ##########################################
 #

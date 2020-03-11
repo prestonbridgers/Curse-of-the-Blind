@@ -11,6 +11,5 @@ struct PLAYER
 
 struct PLAYER *player_create(int y, int x);
 void player_destroy(struct PLAYER *local_player);
-void player_event(struct GAME *g, char c);
 
 #endif

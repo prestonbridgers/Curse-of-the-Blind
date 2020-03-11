@@ -29,8 +29,9 @@ int main(int argc, char *argv[])
 	// Vars
 	struct GAME *game = malloc(sizeof(struct GAME));
 	game->map_win = map_newwin("maps/map.txt");
+	game->plr = player_create(10, 10);
 	game->is_running = 1;
-	map_show(game->map_win);
+	map_show(game->map_win, game->plr);
 
 	// GAME LOOP
 	char in;
@@ -38,12 +39,10 @@ int main(int argc, char *argv[])
 	{
 		if ((in = getch()) == 'q')
 			game->is_running = 0;
-		else if (in == 'm')
-			menu_screen();
 		else
 			event_handle(game, in);
 
-		map_show(game->map_win);
+		map_show(game->map_win, game->plr);
 	}
 
 	// Free memory and cleanup
@@ -54,8 +53,8 @@ int main(int argc, char *argv[])
 
 void event_handle(struct GAME *g, char input)
 {
-	int y = g->map_win->map->pc->y;
-	int x = g->map_win->map->pc->x;
+	int y = g->plr->y;
+	int x = g->plr->x;
 
 	switch (input)
 	{
@@ -63,25 +62,25 @@ void event_handle(struct GAME *g, char input)
 			if (y - 1 < 0) break;
 			else if (g->map_win->map->data[y - 1][x] == '#') break;
 			else if (g->map_win->map->data[y - 1][x] == 'T') menus_display_note("tapes/note.txt");
-			else g->map_win->map->pc->y--;
+			else g->plr->y--;
 			break;
 		case 'j': // down
 			if (y + 1 > g->map_win->map->height - 1) break;
 			else if (g->map_win->map->data[y + 1][x] == '#') break;
 			else if (g->map_win->map->data[y + 1][x] == 'T') menus_display_note("tapes/note.txt");
-			else g->map_win->map->pc->y++;
+			else g->plr->y++;
 			break;
 		case 'h': // left
 			if (x - 1 < 0) break;
 			else if (g->map_win->map->data[y][x - 1] == '#') break;
 			else if (g->map_win->map->data[y][x - 1] == 'T') menus_display_note("tapes/note.txt");
-			else g->map_win->map->pc->x--;
+			else g->plr->x--;
 			break;
 		case 'l': // right
 			if (x + 1 > g->map_win->map->width - 1) break;
 			else if (g->map_win->map->data[y][x + 1] == '#') break;
 			else if (g->map_win->map->data[y][x + 1] == 'T') menus_display_note("tapes/note.txt");
-			else g->map_win->map->pc->x++;
+			else g->plr->x++;
 			break;
 		case 'y': // up-left
 			if (x - 1 < 0 && y - 1 < 0) break;
@@ -89,8 +88,8 @@ void event_handle(struct GAME *g, char input)
 			else if (g->map_win->map->data[y - 1][x - 1] == 'T') menus_display_note("tapes/note.txt");
 			else 
 			{
-				g->map_win->map->pc->x--;
-				g->map_win->map->pc->y--;
+				g->plr->x--;
+				g->plr->y--;
 			}
 			break;
 		case 'u': // up-right
@@ -99,8 +98,8 @@ void event_handle(struct GAME *g, char input)
 			else if (g->map_win->map->data[y - 1][x + 1] == 'T') menus_display_note("tapes/note.txt");
 			else 
 			{
-				g->map_win->map->pc->x++;
-				g->map_win->map->pc->y--;
+				g->plr->x++;
+				g->plr->y--;
 			}
 			break;
 		case 'b': // down-left
@@ -109,8 +108,8 @@ void event_handle(struct GAME *g, char input)
 			else if (g->map_win->map->data[y + 1][x - 1] == 'T') menus_display_note("tapes/note.txt");
 			else 
 			{
-				g->map_win->map->pc->x--;
-				g->map_win->map->pc->y++;
+				g->plr->x--;
+				g->plr->y++;
 			}
 			break;
 		case 'n': // down-right
@@ -119,8 +118,8 @@ void event_handle(struct GAME *g, char input)
 			else if (g->map_win->map->data[y + 1][x + 1] == 'T') menus_display_note("tapes/note.txt");
 			else 
 			{
-				g->map_win->map->pc->x++;
-				g->map_win->map->pc->y++;
+				g->plr->x++;
+				g->plr->y++;
 			}
 			break;
 	}

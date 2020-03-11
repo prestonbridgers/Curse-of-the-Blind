@@ -13,8 +13,6 @@ struct MAP *map_load(char *filename)
 {
 
 	// Vars
-	struct PLAYER *local_player;
-	int playerx, playery;
 	struct MAP *local_map = malloc(sizeof(struct MAP));
 	local_map->height = 0;
 	local_map->width = 0;
@@ -46,20 +44,9 @@ struct MAP *map_load(char *filename)
 			continue;
 		}
 
-		if (c == '@')
-		{
-			playerx = j % local_map->width;
-			playery = i;
-			local_map->data[playery][playerx] = '.';
-		}
-		else
-			local_map->data[i][j % local_map->width] = c;
+		local_map->data[i][j % local_map->width] = c;
 		j++;
 	}
-
-	// Creating the player and assigning it to the map
-	local_player = player_create(playery, playerx);
-	local_map->pc = local_player;
 
 	// Always close files
 	fclose(map_fd);
@@ -73,7 +60,6 @@ struct MAP *map_load(char *filename)
  */
 void map_destroy(struct MAP_WIN *mw)
 {
-	free(mw->map->pc);
 	free(mw->map);
 	delwin(mw->win);
 	free(mw);
@@ -100,7 +86,7 @@ struct MAP_WIN *map_newwin(char *filename)
 	return local_mapwin;
 }
 
-void map_show(struct MAP_WIN *mw)
+void map_show(struct MAP_WIN *mw, struct PLAYER *plr)
 {
 	box(mw->win, 0, 0);
 	for (int i = 0; i < mw->map->height; i++)
@@ -116,7 +102,7 @@ void map_show(struct MAP_WIN *mw)
 	{
 		for (int j = 0; j < mw->map->width; j++)
 		{
-			if (i == mw->map->pc->y && j == mw->map->pc->x)
+			if (i == plr->y && j == plr->x)
 			{
 				mvwaddch(mw->win, i, j, mw->map->data[i - 1][j - 1]); // Top-left
 				mvwaddch(mw->win, i, j + 1, mw->map->data[i - 1][j]); // Top-middle
