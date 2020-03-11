@@ -1,0 +1,59 @@
+##########################################
+#
+#           STRUCTS
+#
+##########################################
+
+/*
+ * Not entirely sure this is necessary
+ */
+GAME: (game.h)
+	struct MAP_WIN *map_win;
+	int is_running;
+
+/*
+ * Holds map data as well as a pointer
+ * to a player struct that I'm not
+ * sure is necessary
+ */
+MAP: (map.h)
+	char **data;
+	int height;
+	int width;
+	struct player *pc; // TODO: Possible rewrite
+
+/*
+ * Essentially ties a map to a nCurses Window
+ */
+MAP_WIN: (map.h)
+	struct MAP *map;
+	Window *win;
+
+/*
+ * Player data, TODO: Probably rename this to PLAYER to
+ * maintain consistency.
+ */
+player: (player.h)
+	int xpos;   // TODO: Probably rename these x and y
+	int ypos;
+	char *name; // TODO: Probably axe this
+
+
+
+##########################################
+#
+# 
+#
+##########################################
+
+##########################################
+#
+#
+#
+##########################################
+
+##########################################
+#
+#
+#
+##########################################

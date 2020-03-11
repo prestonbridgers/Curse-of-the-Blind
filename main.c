@@ -10,40 +10,10 @@
 #include "menus.h"
 #include "game.h"
 
-//  _      _   _             _                                        
-// | | ___| |_( )___   _ __ | | __ _ _   _   ___  ___  _ __ ___   ___ 
-// | |/ _ \ __|// __| | '_ \| |/ _` | | | | / __|/ _ \| '_ ` _ \ / _ \
-// | |  __/ |_  \__ \ | |_) | | (_| | |_| | \__ \ (_) | | | | | |  __/
-// |_|\___|\__| |___/ | .__/|_|\__,_|\__, | |___/\___/|_| |_| |_|\___|
-//                    |_|            |___/                            
-//   __            _    _                     _     _            
-//  / _|_   _  ___| | _(_)_ __   __ _  __   _(_) __| | ___  ___  
-// | |_| | | |/ __| |/ / | '_ \ / _` | \ \ / / |/ _` |/ _ \/ _ \
-// |  _| |_| | (__|   <| | | | | (_| |  \ V /| | (_| |  __/ (_) |
-// |_|  \__,_|\___|_|\_\_|_| |_|\__, |   \_/ |_|\__,_|\___|\___/ 
-//                              |___/                            
-//                                    _           _     
-//   __ _  __ _ _ __ ___   ___  ___  | |__   ___ (_)___ 
-//  / _` |/ _` | '_ ` _ \ / _ \/ __| | '_ \ / _ \| / __|
-// | (_| | (_| | | | | | |  __/\__ \ | |_) | (_) | \__ \
-//  \__, |\__,_|_| |_| |_|\___||___/ |_.__/ \___/|_|___/
-//  |___/                                               
-
-
 // Function prototypes
 void event_handle(struct GAME *g, char input);
 
 /*
- *
- * So this is going to be a cluster fuck for now.
- * I apologize in advance for the spaghetti.
- * I really don't know what the fuck is going on;
- * I've yet to decide on how I want to structure
- * everything. Good luck following the code.
- * I'll get around to organizing it and actually
- * making it readable in the future if this
- * project turns out to be something I actually
- * want to finish.
  *
  */
 int main(int argc, char *argv[])
