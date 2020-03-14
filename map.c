@@ -65,6 +65,31 @@ void map_destroy(struct MAP_WIN *mw)
 	free(mw);
 }
 
+int **map_gen_navmap(struct MAP *m)
+{
+
+	int **navmap = calloc(m->height, sizeof(int*));
+	for (int i = 0; i < m->height; i++)
+	{
+		navmap[i] = calloc(m->width, sizeof(int));
+		for (int j = 0; j < m->width; j++)
+		{
+			switch (m->data[i][j])
+			{
+				case '.':
+				case '+':
+					navmap[i][j] = 0;
+					break;
+				default:
+					navmap[i][j] = 1;
+					break;
+			}
+		}
+	}
+
+	return navmap;
+}
+
 /*
  *
  * nCurses wrapper function to create a new window in
@@ -102,21 +127,27 @@ void map_show(struct MAP_WIN *mw, struct PLAYER *plr)
 	{
 		for (int j = 0; j < mw->map->width; j++)
 		{
+			mvwaddch(mw->win, i, j, mw->map->data[i][j]); // Top-left
 			if (i == plr->y && j == plr->x)
-			{
-				mvwaddch(mw->win, i, j, mw->map->data[i - 1][j - 1]); // Top-left
-				mvwaddch(mw->win, i, j + 1, mw->map->data[i - 1][j]); // Top-middle
-				mvwaddch(mw->win, i, j + 2, mw->map->data[i - 1][j + 1]); // Top-right
-
+				mvwaddch(mw->win, i, j, '@'); // Top-left
 				
-				mvwaddch(mw->win, i + 1, j, mw->map->data[i][j - 1]); // Middle-left
-				mvwaddch(mw->win, i + 1, j + 1, '@'); // Character
-				mvwaddch(mw->win, i + 1, j + 2, mw->map->data[i][j + 1]); // Middle-right
 
-				mvwaddch(mw->win, i + 2, j, mw->map->data[i + 1][j - 1]); // Bot-left
-				mvwaddch(mw->win, i + 2, j + 1, mw->map->data[i + 1][j]); // Bot-middle
-				mvwaddch(mw->win, i + 2, j + 2, mw->map->data[i + 1][j + 1]); // Bot-right
-			}
+
+//			if (i == plr->y && j == plr->x)
+//			{
+//				mvwaddch(mw->win, i, j, mw->map->data[i - 1][j - 1]); // Top-left
+//				mvwaddch(mw->win, i, j + 1, mw->map->data[i - 1][j]); // Top-middle
+//				mvwaddch(mw->win, i, j + 2, mw->map->data[i - 1][j + 1]); // Top-right
+//
+//				
+//				mvwaddch(mw->win, i + 1, j, mw->map->data[i][j - 1]); // Middle-left
+//				mvwaddch(mw->win, i + 1, j + 1, '@'); // Character
+//				mvwaddch(mw->win, i + 1, j + 2, mw->map->data[i][j + 1]); // Middle-right
+//
+//				mvwaddch(mw->win, i + 2, j, mw->map->data[i + 1][j - 1]); // Bot-left
+//				mvwaddch(mw->win, i + 2, j + 1, mw->map->data[i + 1][j]); // Bot-middle
+//				mvwaddch(mw->win, i + 2, j + 2, mw->map->data[i + 1][j + 1]); // Bot-right
+//			}
 		}
 	}
 	wrefresh(mw->win);

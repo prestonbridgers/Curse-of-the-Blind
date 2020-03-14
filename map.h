@@ -20,5 +20,6 @@ struct MAP_WIN
 struct MAP_WIN *map_newwin(char *filename);
 void map_destroy(struct MAP_WIN *mw);
 void map_show(struct MAP_WIN *mw, struct PLAYER *plr);
+int **map_gen_navmap(struct MAP *map);
 
 #endif

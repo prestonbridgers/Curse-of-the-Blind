@@ -10,6 +10,8 @@
 #include "menus.h"
 #include "game.h"
 
+#include "a_star.h"
+
 // Function prototypes
 void event_handle(struct GAME *g, char input);
 
@@ -33,6 +35,17 @@ int main(int argc, char *argv[])
 	game->is_running = 1;
 	map_show(game->map_win, game->plr);
 
+	// DEBUG: Testing a_star pathfinding
+	int **navmap = map_gen_navmap(game->map_win->map);
+	for (int i = 0; i < game->map_win->map->height; i++)
+	{
+		for (int j = 0; j < game->map_win->map->width; j++)
+		{
+			fprintf(stderr, "%d ", navmap[i][j]);
+		}
+		fprintf(stderr, "\n");
+	}
+
 	// GAME LOOP
 	char in;
 	while (game->is_running)
@@ -43,6 +56,17 @@ int main(int argc, char *argv[])
 			event_handle(game, in);
 
 		map_show(game->map_win, game->plr);
+
+		//DEBUG: testing a_star pathfinding
+		int **path = ASTAR_get_path(navmap, game->map_win->map->height, game->map_win->map->width, game->plr->x, game->plr->y, 15, 15);
+		int p_count = 0;
+		while (!(path[p_count][0] == END_OF_PATH && path[p_count][1] == END_OF_PATH))
+		{
+			mvwaddch(game->map_win->win, path[p_count][1], path[p_count][0], '>');
+			p_count++;
+		}
+		wrefresh(game->map_win->win);
+		refresh();
 	}
 
 	// Free memory and cleanup

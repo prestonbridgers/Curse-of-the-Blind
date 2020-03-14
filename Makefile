@@ -1,5 +1,5 @@
 default: player.o map.o menus.o
-	gcc player.o map.o menus.o main.c -lncurses
+	gcc player.o map.o menus.o main.c -L. -lncurses -la_star
 
 player.o: player.c
 map.o: map.c
