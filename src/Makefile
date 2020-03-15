@@ -22,4 +22,4 @@ run:
 	./curse 2> ../errlog.txt
 
 clean:
-	rm *.o
+	rm $(ODIR)/*.o

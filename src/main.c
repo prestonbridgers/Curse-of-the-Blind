@@ -6,7 +6,6 @@
 
 #include "player.h"
 #include "map.h"
-#include "event.h"
 #include "menus.h"
 #include "game.h"
 
