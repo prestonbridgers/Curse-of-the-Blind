@@ -39,9 +39,6 @@ PLAYER: (player.h)
 #
 ##########################################
 
-Player creation (init) is happening
-when you load a map? Fix that.
-
 ##########################################
 #
 #           TODO

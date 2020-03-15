@@ -11,6 +11,8 @@
 
 #include "a_star.h"
 
+#define MAP_PATH "../maps/map.txt"
+
 // Function prototypes
 void event_handle(struct GAME *g, char input);
 
@@ -29,7 +31,7 @@ int main(int argc, char *argv[])
 
 	// Vars
 	struct GAME *game = malloc(sizeof(struct GAME));
-	game->map_win = map_newwin("../maps/map.txt");
+	game->map_win = map_newwin(MAP_PATH);
 	game->plr = player_create(10, 10);
 	game->is_running = 1;
 	map_show(game->map_win, game->plr);
