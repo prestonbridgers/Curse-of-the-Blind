@@ -84,68 +84,28 @@ void event_handle(struct GAME *g, char input)
 	switch (input)
 	{
 		case 'k': // up
-			if (y - 1 < 0) break;
-			else if (g->map_win->map->data[y - 1][x] == '#') break;
-			else if (g->map_win->map->data[y - 1][x] == 'T') menus_display_note("tapes/note.txt");
-			else g->plr->y--;
+			player_move(g->plr, g->map_win->map, util_v2_N);
 			break;
 		case 'j': // down
-			if (y + 1 > g->map_win->map->height - 1) break;
-			else if (g->map_win->map->data[y + 1][x] == '#') break;
-			else if (g->map_win->map->data[y + 1][x] == 'T') menus_display_note("tapes/note.txt");
-			else g->plr->y++;
+			player_move(g->plr, g->map_win->map, util_v2_S);
 			break;
 		case 'h': // left
-			if (x - 1 < 0) break;
-			else if (g->map_win->map->data[y][x - 1] == '#') break;
-			else if (g->map_win->map->data[y][x - 1] == 'T') menus_display_note("tapes/note.txt");
-			else g->plr->x--;
+			player_move(g->plr, g->map_win->map, util_v2_W);
 			break;
 		case 'l': // right
-			if (x + 1 > g->map_win->map->width - 1) break;
-			else if (g->map_win->map->data[y][x + 1] == '#') break;
-			else if (g->map_win->map->data[y][x + 1] == 'T') menus_display_note("tapes/note.txt");
-			else g->plr->x++;
+			player_move(g->plr, g->map_win->map, util_v2_E);
 			break;
 		case 'y': // up-left
-			if (x - 1 < 0 && y - 1 < 0) break;
-			else if (g->map_win->map->data[y - 1][x - 1] == '#') break;
-			else if (g->map_win->map->data[y - 1][x - 1] == 'T') menus_display_note("tapes/note.txt");
-			else 
-			{
-				g->plr->x--;
-				g->plr->y--;
-			}
+			player_move(g->plr, g->map_win->map, util_v2_NW);
 			break;
 		case 'u': // up-right
-			if (x + 1 < 0 && y - 1 < 0) break;
-			else if (g->map_win->map->data[y - 1][x + 1] == '#') break;
-			else if (g->map_win->map->data[y - 1][x + 1] == 'T') menus_display_note("tapes/note.txt");
-			else 
-			{
-				g->plr->x++;
-				g->plr->y--;
-			}
+			player_move(g->plr, g->map_win->map, util_v2_NE);
 			break;
 		case 'b': // down-left
-			if (x - 1 < 0 && y + 1 < 0) break;
-			else if (g->map_win->map->data[y + 1][x - 1] == '#') break;
-			else if (g->map_win->map->data[y + 1][x - 1] == 'T') menus_display_note("tapes/note.txt");
-			else 
-			{
-				g->plr->x--;
-				g->plr->y++;
-			}
+			player_move(g->plr, g->map_win->map, util_v2_SW);
 			break;
 		case 'n': // down-right
-			if (x + 1 < 0 && y + 1 < 0) break;
-			else if (g->map_win->map->data[y + 1][x + 1] == '#') break;
-			else if (g->map_win->map->data[y + 1][x + 1] == 'T') menus_display_note("tapes/note.txt");
-			else 
-			{
-				g->plr->x++;
-				g->plr->y++;
-			}
+			player_move(g->plr, g->map_win->map, util_v2_SE);
 			break;
 	}
 }

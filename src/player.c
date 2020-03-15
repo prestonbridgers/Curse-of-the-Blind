@@ -26,3 +26,15 @@ void player_destroy(struct PLAYER *local_player)
 	free(local_player);
 }
 
+void player_move(struct PLAYER *p, struct MAP *m, struct VECTOR2 (*move_func)(struct VECTOR2))
+{
+	struct VECTOR2 loc = (struct VECTOR2) {p->x, p->y};
+	struct VECTOR2 dest = move_func(loc);
+
+	if (m->data[dest.y][dest.x] != '#')
+	{
+		p->y = dest.y;
+		p->x = dest.x;
+	}
+}
+

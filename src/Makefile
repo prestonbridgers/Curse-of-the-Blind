@@ -7,7 +7,7 @@ ODIR=./obj
 
 LIBS=-lncurses -la_star
 
-_OBJ = player.o map.o menus.o
+_OBJ = player.o map.o menus.o util.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c
