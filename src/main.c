@@ -4,17 +4,17 @@
 #include <ncurses.h>
 #include <unistd.h>
 
-#include "player.h"
+#include "core_structs.h"
 #include "map.h"
 #include "menus.h"
-#include "game.h"
+#include "player.h"
 
 #include "a_star.h"
 
 #define MAP_PATH "../maps/map.txt"
 
 // Function prototypes
-void event_handle(struct GAME *g, char input);
+void event_handle(GAME *g, char input);
 
 /*
  *
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	refresh();
 
 	// Vars
-	struct GAME *game = malloc(sizeof(struct GAME));
+	GAME *game = malloc(sizeof(GAME));
 	game->map_win = map_newwin(MAP_PATH);
 	game->plr = player_create(10, 10);
 	game->is_running = 1;
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void event_handle(struct GAME *g, char input)
+void event_handle(GAME *g, char input)
 {
 	int y = g->plr->y;
 	int x = g->plr->x;

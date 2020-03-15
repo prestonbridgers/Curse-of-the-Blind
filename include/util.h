@@ -1,21 +1,21 @@
 #ifndef UTIL_H_INCLUDED
 #define UTIL_H_INCLUDED
 
-struct VECTOR2
+typedef struct
 {
 	int x;
 	int y;
-};
+} VECTOR2;
 
-struct VECTOR2 util_v2_NW(struct VECTOR2 v);
-struct VECTOR2 util_v2_N(struct VECTOR2 v);
-struct VECTOR2 util_v2_NE(struct VECTOR2 v);
+VECTOR2 util_v2_NW(VECTOR2 v);
+VECTOR2 util_v2_N(VECTOR2 v);
+VECTOR2 util_v2_NE(VECTOR2 v);
 
-struct VECTOR2 util_v2_E(struct VECTOR2 v);
-struct VECTOR2 util_v2_W(struct VECTOR2 v);
+VECTOR2 util_v2_E(VECTOR2 v);
+VECTOR2 util_v2_W(VECTOR2 v);
 
-struct VECTOR2 util_v2_SW(struct VECTOR2 v);
-struct VECTOR2 util_v2_S(struct VECTOR2 v);
-struct VECTOR2 util_v2_SE(struct VECTOR2 v);
+VECTOR2 util_v2_SW(VECTOR2 v);
+VECTOR2 util_v2_S(VECTOR2 v);
+VECTOR2 util_v2_SE(VECTOR2 v);
 
 #endif

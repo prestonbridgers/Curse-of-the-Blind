@@ -1,0 +1,8 @@
+Typedef all my structs
+
+Implement a entity list system for managing entities on the map
+	Should be contained in the MAP struct
+
+Make a proper event handling system and get that shit out of main
+
+

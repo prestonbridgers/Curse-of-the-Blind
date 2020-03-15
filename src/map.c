@@ -1,7 +1,8 @@
+#include "map.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
-#include "map.h"
 
 /*
  *
@@ -9,11 +10,11 @@
  * in the given map.
  *
  */
-struct MAP *map_load(char *filename)
+MAP *map_load(char *filename)
 {
 
 	// Vars
-	struct MAP *local_map = malloc(sizeof(struct MAP));
+	MAP *local_map = malloc(sizeof(MAP));
 	local_map->height = 0;
 	local_map->width = 0;
 	FILE *map_fd = fopen(filename, "r");
@@ -58,14 +59,14 @@ struct MAP *map_load(char *filename)
  * Frees memory associated with given map data structure.
  *
  */
-void map_destroy(struct MAP_WIN *mw)
+void map_destroy(MAP_WIN *mw)
 {
 	free(mw->map);
 	delwin(mw->win);
 	free(mw);
 }
 
-int **map_gen_navmap(struct MAP *m)
+int **map_gen_navmap(MAP *m)
 {
 
 	int **navmap = calloc(m->height, sizeof(int*));
@@ -96,10 +97,10 @@ int **map_gen_navmap(struct MAP *m)
  * association with a given map.
  *
  */
-struct MAP_WIN *map_newwin(char *filename)
+MAP_WIN *map_newwin(char *filename)
 {
-	struct MAP_WIN *local_mapwin = malloc(sizeof(struct MAP_WIN));
-	struct MAP *local_map = map_load(filename);
+	MAP_WIN *local_mapwin = malloc(sizeof(MAP_WIN));
+	MAP *local_map = map_load(filename);
 
 	int starty = (LINES - local_map->height) / 2;
 	int startx = (COLS - local_map->width) / 2;
@@ -111,7 +112,7 @@ struct MAP_WIN *map_newwin(char *filename)
 	return local_mapwin;
 }
 
-void map_show(struct MAP_WIN *mw, struct PLAYER *plr)
+void map_show(MAP_WIN *mw, PLAYER *plr)
 {
 	box(mw->win, 0, 0);
 	for (int i = 0; i < mw->map->height; i++)
