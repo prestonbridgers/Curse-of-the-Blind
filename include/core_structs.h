@@ -3,8 +3,33 @@
 
 #include <ncurses.h>
 
+#define CHAR_TILE '@'
+#define ENEMY_TILE 'e'
+#define GROUND_TILE '.'
+#define WALL_TILE '#'
+#define DOOR_TILE '+'
+
+enum ENTITY
+{
+	player,
+	enemy
+};
+
 typedef struct
 {
+	enum ENTITY uid;
+} ENTITY_TYPER;
+
+typedef struct
+{ 
+	enum ENTITY uid;
+	int x;
+	int y;
+} ENEMY;
+
+typedef struct
+{
+	enum ENTITY uid;
 	int x;
 	int y;
 } PLAYER;
@@ -14,6 +39,8 @@ typedef struct
 	char **data;
 	int height;
 	int width;
+	void **ent_list;
+	int num_entities;
 } MAP;
 
 typedef struct

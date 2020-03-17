@@ -5,9 +5,11 @@
 #include <unistd.h>
 
 #include "core_structs.h"
+#include "enemy.h"
 #include "map.h"
 #include "menus.h"
 #include "player.h"
+#include "enemy.h"
 
 #include "a_star.h"
 
@@ -32,8 +34,20 @@ int main(int argc, char *argv[])
 	// Vars
 	GAME *game = malloc(sizeof(GAME));
 	game->map_win = map_newwin(MAP_PATH);
-	game->plr = player_create(10, 10);
+	game->plr = player_create(player, 10, 10);
+
+	game->map_win->map->ent_list[0] = game->plr;
+	game->map_win->map->num_entities++;
+
 	game->is_running = 1;
+
+	// Creating entities
+	enemy_create(5, 5, game->map_win->map); 
+	enemy_create(10, 14, game->map_win->map); 
+	enemy_create(5, 6, game->map_win->map); 
+	enemy_create(17, 15, game->map_win->map); 
+	map_debug_print_ents(game->map_win->map);
+
 	map_show(game->map_win, game->plr);
 
 	// DEBUG: Testing a_star pathfinding
@@ -58,15 +72,6 @@ int main(int argc, char *argv[])
 
 		map_show(game->map_win, game->plr);
 
-		//DEBUG: testing a_star pathfinding
-		int **path = ASTAR_get_path(navmap, game->map_win->map->height, game->map_win->map->width, game->plr->x, game->plr->y, 15, 15);
-		int p_count = 0;
-		while (!(path[p_count][0] == END_OF_PATH && path[p_count][1] == END_OF_PATH))
-		{
-			mvwaddch(game->map_win->win, path[p_count][1], path[p_count][0], '>');
-			p_count++;
-		}
-		wrefresh(game->map_win->win);
 		refresh();
 	}
 

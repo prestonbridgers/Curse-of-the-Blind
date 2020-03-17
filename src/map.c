@@ -1,22 +1,21 @@
 #include "map.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
 
 /*
  *
- * Loads a map from a given file. Assumes the existence of a player tile '@'
+ * Loads a map from a given file. Assumes the existence of a char tile '@'
  * in the given map.
  *
  */
 MAP *map_load(char *filename)
-{
-
+{ 
 	// Vars
 	MAP *local_map = malloc(sizeof(MAP));
 	local_map->height = 0;
 	local_map->width = 0;
+	local_map->num_entities = 0;
 	FILE *map_fd = fopen(filename, "r");
 	char c;
 
@@ -33,6 +32,9 @@ MAP *map_load(char *filename)
 	local_map->data = malloc(sizeof(char*) * local_map->height);
 	for (int i = 0; i < local_map->height; i++)
 		local_map->data[i] = malloc(sizeof(char) * local_map->width);
+	
+	// Allocate memory for the entity list
+	local_map->ent_list = calloc(local_map->width * local_map->height, sizeof(void*));
 
 	// Read map file data into the local_map data array
 	int i = 0;
@@ -77,8 +79,8 @@ int **map_gen_navmap(MAP *m)
 		{
 			switch (m->data[i][j])
 			{
-				case '.':
-				case '+':
+				case GROUND_TILE:
+				case DOOR_TILE:
 					navmap[i][j] = 0;
 					break;
 				default:
@@ -114,23 +116,13 @@ MAP_WIN *map_newwin(char *filename)
 
 void map_show(MAP_WIN *mw, PLAYER *plr)
 {
-	box(mw->win, 0, 0);
-	for (int i = 0; i < mw->map->height; i++)
-	{
-		for (int j = 0; j < mw->map->width; j++)
-		{
-			mvwaddch(mw->win, i + 1, j + 1, ' '); // Clearing the screen
-		}
-	}
-	wrefresh(mw->win);
-
 	for (int i = 0; i < mw->map->height; i++)
 	{
 		for (int j = 0; j < mw->map->width; j++)
 		{
 			mvwaddch(mw->win, i, j, mw->map->data[i][j]); // Top-left
 			if (i == plr->y && j == plr->x)
-				mvwaddch(mw->win, i, j, '@'); // Top-left
+				mvwaddch(mw->win, i, j, CHAR_TILE); // Top-left
 				
 
 
@@ -142,7 +134,7 @@ void map_show(MAP_WIN *mw, PLAYER *plr)
 //
 //				
 //				mvwaddch(mw->win, i + 1, j, mw->map->data[i][j - 1]); // Middle-left
-//				mvwaddch(mw->win, i + 1, j + 1, '@'); // Character
+//				mvwaddch(mw->win, i + 1, j + 1, CHAR_TILE); // Character
 //				mvwaddch(mw->win, i + 1, j + 2, mw->map->data[i][j + 1]); // Middle-right
 //
 //				mvwaddch(mw->win, i + 2, j, mw->map->data[i + 1][j - 1]); // Bot-left
@@ -151,5 +143,43 @@ void map_show(MAP_WIN *mw, PLAYER *plr)
 //			}
 		}
 	}
+
+	// show what's on the entity list
+	for (int i = mw->map->num_entities - 1; i >= 0; i--)
+	{
+		ENTITY_TYPER *ent = (ENTITY_TYPER*) mw->map->ent_list[i];
+		PLAYER *p;
+		ENEMY *e;
+		switch (ent->uid)
+		{
+			case player:
+				p = (PLAYER*) ent;
+				mvwaddch(mw->win, p->y, p->x, CHAR_TILE);
+				break;
+			case enemy:
+				e = (ENEMY*) ent;
+				mvwaddch(mw->win, e->y, e->x, ENEMY_TILE);
+				break;
+		}
+	}
+
 	wrefresh(mw->win);
+}
+
+void map_debug_print_ents(MAP *m)
+{
+	fprintf(stderr, "PRINTING ENTITY LIST (amount: %d):\n", m->num_entities);
+	for (int i = 0; i < m->num_entities; i++)
+	{
+		ENTITY_TYPER *ent = (ENTITY_TYPER*) m->ent_list[i];
+		switch (ent->uid)
+		{
+			case player:
+				fprintf(stderr, "\tEnt #%d: player\n", i);
+				break;
+			case enemy:
+				fprintf(stderr, "\tEnt #%d: enemy\n", i);
+				break;
+		}
+	}
 }

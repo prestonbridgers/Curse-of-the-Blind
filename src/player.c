@@ -7,9 +7,10 @@
  * given initial xy coordinates.
  *
  */
-PLAYER *player_create(int y, int x)
+PLAYER *player_create(enum ENTITY uid, int y, int x)
 {
 	PLAYER *local_player = malloc(sizeof(PLAYER));
+	local_player->uid = uid;
 	local_player->x = x;
 	local_player->y = y;
 	return local_player;

@@ -4,7 +4,7 @@
 #include "core_structs.h"
 #include "util.h"
 
-PLAYER *player_create(int y, int x);
+PLAYER *player_create(enum ENTITY uid, int y, int x);
 void player_destroy(PLAYER *local_player);
 void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2));
 
