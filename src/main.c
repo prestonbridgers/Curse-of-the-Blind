@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	// Vars
 	GAME *game = malloc(sizeof(GAME));
 	game->map_win = map_newwin(MAP_PATH);
-	game->plr = player_create(player, 10, 10);
+	game->plr = player_create(player, 19, 35);
 
 	game->map_win->map->ent_list[0] = game->plr;
 	game->map_win->map->num_entities++;
@@ -43,23 +43,12 @@ int main(int argc, char *argv[])
 
 	// Creating entities
 	enemy_create(5, 5, game->map_win->map); 
-	enemy_create(10, 14, game->map_win->map); 
-	enemy_create(5, 6, game->map_win->map); 
-	enemy_create(17, 15, game->map_win->map); 
+	enemy_create(1, 7, game->map_win->map); 
+	enemy_create(5, 18, game->map_win->map); 
+	enemy_create(18, 5, game->map_win->map); 
 	map_debug_print_ents(game->map_win->map);
 
 	map_show(game->map_win, game->plr);
-
-	// DEBUG: Testing a_star pathfinding
-	int **navmap = map_gen_navmap(game->map_win->map);
-	for (int i = 0; i < game->map_win->map->height; i++)
-	{
-		for (int j = 0; j < game->map_win->map->width; j++)
-		{
-			fprintf(stderr, "%d ", navmap[i][j]);
-		}
-		fprintf(stderr, "\n");
-	}
 
 	// GAME LOOP
 	char in;
@@ -69,6 +58,25 @@ int main(int argc, char *argv[])
 			game->is_running = 0;
 		else
 			event_handle(game, in);
+
+		// Updating enemy
+		for (int i = 1; i <= 4; i++)
+		{
+			fprintf(stderr, "Creating navmap");
+
+			int **navmap = map_gen_navmap(game->map_win->map);
+			for (int i = 0; i < game->map_win->map->height; i++)
+			{
+				for (int j = 0; j < game->map_win->map->width; j++)
+				{
+					fprintf(stderr, "%d ", navmap[i][j]);
+				}
+				fprintf(stderr, "\n");
+			}
+
+			ENEMY *e1 = (ENEMY*) game->map_win->map->ent_list[i];
+			enemy_move_toward(e1, navmap, game->plr, game->map_win->map);
+		}
 
 		map_show(game->map_win, game->plr);
 

@@ -32,7 +32,7 @@ void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
 	VECTOR2 loc = (VECTOR2) {p->x, p->y};
 	VECTOR2 dest = move_func(loc);
 
-	if (m->data[dest.y][dest.x] != '#')
+	if (m->data[dest.y][dest.x] != WALL_TILE)
 	{
 		p->y = dest.y;
 		p->x = dest.x;
