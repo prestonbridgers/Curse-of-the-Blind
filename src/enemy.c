@@ -12,10 +12,10 @@ void enemy_create(int x, int y, MAP *m)
 	e->uid = enemy;
 	e->x = x;
 	e->y = y;
-	e->isPassable = 0;
+	e->is_passable = 0;
 	e->atk = 10;
 
-	m->ent_list[m->num_entities++] = e;
+	m->ent_list[m->num_ents++] = e;
 }
 
 void enemy_destroy(ENEMY *e)

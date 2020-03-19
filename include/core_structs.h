@@ -18,7 +18,7 @@ enum ENTITY
 typedef struct
 {
 	enum ENTITY uid;
-	int isPassable;
+	int is_passable;
 	int x;
 	int y;
 } ENTITY_TYPER;
@@ -26,7 +26,7 @@ typedef struct
 typedef struct
 { 
 	enum ENTITY uid;
-	int isPassable;
+	int is_passable;
 	int x;
 	int y;
 	int atk;
@@ -35,7 +35,7 @@ typedef struct
 typedef struct
 {
 	enum ENTITY uid;
-	int isPassable;
+	int is_passable;
 	int x;
 	int y;
 	int hp;
@@ -47,7 +47,7 @@ typedef struct
 	int height;
 	int width;
 	void **ent_list;
-	int num_entities;
+	int num_ents;
 } MAP;
 
 typedef struct

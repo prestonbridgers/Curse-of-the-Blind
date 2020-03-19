@@ -1,22 +1,17 @@
-#include "map.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
 
-/*
- *
- * Loads a map from a given file. Assumes the existence of a char tile '@'
- * in the given map.
- *
- */
-MAP *map_load(char *filename)
+#include "map.h"
+
+MAP *map_load(char *map_path)
 { 
 	// Vars
 	MAP *local_map = malloc(sizeof(MAP));
 	local_map->height = 0;
 	local_map->width = 0;
-	local_map->num_entities = 0;
-	FILE *map_fd = fopen(filename, "r");
+	local_map->num_ents = 0;
+	FILE *map_fd = fopen(map_path, "r");
 	char c;
 
 	// Get the width and height of the map
@@ -51,16 +46,10 @@ MAP *map_load(char *filename)
 		j++;
 	}
 
-	// Always close files
 	fclose(map_fd);
 	return local_map;
 }
 
-/*
- *
- * Frees memory associated with given map data structure.
- *
- */
 void map_destroy(MAP_WIN *mw)
 {
 	free(mw->map);
@@ -93,16 +82,10 @@ int **map_gen_navmap(MAP *m)
 	return navmap;
 }
 
-/*
- *
- * nCurses wrapper function to create a new window in
- * association with a given map.
- *
- */
-MAP_WIN *map_newwin(char *filename)
+MAP_WIN *map_newwin(char *map_path)
 {
 	MAP_WIN *local_mapwin = malloc(sizeof(MAP_WIN));
-	MAP *local_map = map_load(filename);
+	MAP *local_map = map_load(map_path);
 
 	int starty = (LINES - local_map->height) / 2;
 	int startx = (COLS - local_map->width) / 2;
@@ -116,12 +99,13 @@ MAP_WIN *map_newwin(char *filename)
 
 void map_show(MAP_WIN *mw)
 {
+	// Show map data
 	for (int i = 0; i < mw->map->height; i++)
 		for (int j = 0; j < mw->map->width; j++)
 			mvwaddch(mw->win, i, j, mw->map->data[i][j]);
 
-	// show what's on the entity list
-	for (int i = mw->map->num_entities - 1; i >= 0; i--)
+	// Show entities
+	for (int i = mw->map->num_ents - 1; i >= 0; i--)
 	{
 		ENTITY_TYPER *ent = (ENTITY_TYPER*) mw->map->ent_list[i];
 		switch (ent->uid)
@@ -140,8 +124,8 @@ void map_show(MAP_WIN *mw)
 
 void map_debug_print_ents(MAP *m)
 {
-	fprintf(stderr, "PRINTING ENTITY LIST (amount: %d):\n", m->num_entities);
-	for (int i = 0; i < m->num_entities; i++)
+	fprintf(stderr, "PRINTING ENTITY LIST (amount: %d):\n", m->num_ents);
+	for (int i = 0; i < m->num_ents; i++)
 	{
 		ENTITY_TYPER *ent = (ENTITY_TYPER*) m->ent_list[i];
 		switch (ent->uid)

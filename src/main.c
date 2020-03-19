@@ -14,12 +14,8 @@
 
 #define MAP_PATH "../maps/map.txt"
 
-// Function prototypes
 void event_handle(GAME *g, char input);
 
-/*
- *
- */
 int main(int argc, char *argv[])
 {
 	// Curses Initialization
@@ -33,12 +29,12 @@ int main(int argc, char *argv[])
 	// Instantiating the game
 	GAME *game = malloc(sizeof(GAME));
 	game->map_win = map_newwin(MAP_PATH);
-	game->plr = player_create(player, 19, 35);
+	game->plr = player_create(player, 35, 19);
 	game->is_running = 1;
 
 	// Putting the player into the map's entity list
 	game->map_win->map->ent_list[0] = game->plr;
-	game->map_win->map->num_entities++;
+	game->map_win->map->num_ents++;
 
 	// Creating entities
 	enemy_create(5, 5, game->map_win->map); 
@@ -60,7 +56,6 @@ int main(int argc, char *argv[])
 
 	} while (game->is_running);
 
-	// Free memory and cleanup
 	map_destroy(game->map_win);
 	endwin();
 	return 0;
@@ -70,7 +65,7 @@ void event_handle(GAME *g, char input)
 {
 	switch (input)
 	{
-		case 'q':
+		case 'q': // quit
 			g->is_running = 0;
 			break;
 		case 'k': // up

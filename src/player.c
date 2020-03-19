@@ -6,13 +6,13 @@
  * given initial xy coordinates.
  *
  */
-PLAYER *player_create(enum ENTITY uid, int y, int x)
+PLAYER *player_create(enum ENTITY uid, int x, int y)
 {
 	PLAYER *local_player = malloc(sizeof(PLAYER));
 	local_player->uid = uid;
 	local_player->x = x;
 	local_player->y = y;
-	local_player->isPassable = 0;
+	local_player->is_passable = 0;
 	local_player->hp = 100;
 	return local_player;
 }
@@ -23,9 +23,9 @@ PLAYER *player_create(enum ENTITY uid, int y, int x)
  * player data structure.
  *
  */
-void player_destroy(PLAYER *local_player)
+void player_destroy(PLAYER *plr)
 {
-	free(local_player);
+	free(plr);
 }
 
 void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
@@ -35,14 +35,14 @@ void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
 	int encountered_entity = 0;
 
 	ENTITY_TYPER *ent;
-	for (int i = 1; i < m->num_entities; i++)
+	for (int i = 1; i < m->num_ents; i++)
 	{
 		ent = (ENTITY_TYPER*) m->ent_list[i];
 		if (dest.x == ent->x && dest.y == ent->y) // Player will run into this entity
 		{
 			encountered_entity = 1;
 			fprintf(stderr, "Player interacting with entity #%d\n", i);
-			if (ent->isPassable)
+			if (ent->is_passable)
 			{
 				p->y = dest.y;
 				p->x = dest.x;
