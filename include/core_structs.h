@@ -18,11 +18,15 @@ enum ENTITY
 typedef struct
 {
 	enum ENTITY uid;
+	int isPassable;
+	int x;
+	int y;
 } ENTITY_TYPER;
 
 typedef struct
 { 
 	enum ENTITY uid;
+	int isPassable;
 	int x;
 	int y;
 } ENEMY;
@@ -30,6 +34,7 @@ typedef struct
 typedef struct
 {
 	enum ENTITY uid;
+	int isPassable;
 	int x;
 	int y;
 } PLAYER;
