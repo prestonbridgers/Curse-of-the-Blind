@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 /*
- *
- * Creates a player data structure
+ * * Creates a player data structure
  * given initial xy coordinates.
  *
  */
@@ -13,6 +12,7 @@ PLAYER *player_create(enum ENTITY uid, int y, int x)
 	local_player->uid = uid;
 	local_player->x = x;
 	local_player->y = y;
+	local_player->isPassable = 0;
 	return local_player;
 }
 
@@ -31,8 +31,26 @@ void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
 {
 	VECTOR2 loc = (VECTOR2) {p->x, p->y};
 	VECTOR2 dest = move_func(loc);
+	int encountered_entity = 0;
 
-	if (m->data[dest.y][dest.x] != WALL_TILE)
+	ENTITY_TYPER *ent;
+	for (int i = 1; i < m->num_entities; i++)
+	{
+		ent = (ENTITY_TYPER*) m->ent_list[i];
+		if (dest.x == ent->x && dest.y == ent->y) // Player will run into this entity
+		{
+			encountered_entity = 1;
+			fprintf(stderr, "Player interacting with entity #%d\n", i);
+			if (ent->isPassable)
+			{
+				p->y = dest.y;
+				p->x = dest.x;
+				// Run collision function
+			}
+		}
+	}
+
+	if (!encountered_entity && m->data[dest.y][dest.x] != WALL_TILE)
 	{
 		p->y = dest.y;
 		p->x = dest.x;

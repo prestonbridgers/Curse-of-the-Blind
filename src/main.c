@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 	enemy_create(18, 5, game->map_win->map); 
 	map_debug_print_ents(game->map_win->map);
 
-	map_show(game->map_win, game->plr);
+	map_show(game->map_win);
 
 	// GAME LOOP
 	char in;
@@ -60,25 +60,15 @@ int main(int argc, char *argv[])
 			event_handle(game, in);
 
 		// Updating enemy
-		for (int i = 1; i <= 4; i++)
-		{
-			fprintf(stderr, "Creating navmap");
+//		for (int i = 1; i <= 4; i++)
+//		{
+//			int **navmap = map_gen_navmap(game->map_win->map);
 
-			int **navmap = map_gen_navmap(game->map_win->map);
-			for (int i = 0; i < game->map_win->map->height; i++)
-			{
-				for (int j = 0; j < game->map_win->map->width; j++)
-				{
-					fprintf(stderr, "%d ", navmap[i][j]);
-				}
-				fprintf(stderr, "\n");
-			}
+//			ENEMY *e1 = (ENEMY*) game->map_win->map->ent_list[i];
+//			enemy_move_toward(e1, navmap, game->plr, game->map_win->map);
+//		}
 
-			ENEMY *e1 = (ENEMY*) game->map_win->map->ent_list[i];
-			enemy_move_toward(e1, navmap, game->plr, game->map_win->map);
-		}
-
-		map_show(game->map_win, game->plr);
+		map_show(game->map_win);
 
 		refresh();
 	}

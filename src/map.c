@@ -98,8 +98,7 @@ int **map_gen_navmap(MAP *m)
  * nCurses wrapper function to create a new window in
  * association with a given map.
  *
- */
-MAP_WIN *map_newwin(char *filename)
+ */ MAP_WIN *map_newwin(char *filename)
 {
 	MAP_WIN *local_mapwin = malloc(sizeof(MAP_WIN));
 	MAP *local_map = map_load(filename);
@@ -114,51 +113,23 @@ MAP_WIN *map_newwin(char *filename)
 	return local_mapwin;
 }
 
-void map_show(MAP_WIN *mw, PLAYER *plr)
+void map_show(MAP_WIN *mw)
 {
 	for (int i = 0; i < mw->map->height; i++)
-	{
 		for (int j = 0; j < mw->map->width; j++)
-		{
-			mvwaddch(mw->win, i, j, mw->map->data[i][j]); // Top-left
-			if (i == plr->y && j == plr->x)
-				mvwaddch(mw->win, i, j, CHAR_TILE); // Top-left
-				
-
-
-//			if (i == plr->y && j == plr->x)
-//			{
-//				mvwaddch(mw->win, i, j, mw->map->data[i - 1][j - 1]); // Top-left
-//				mvwaddch(mw->win, i, j + 1, mw->map->data[i - 1][j]); // Top-middle
-//				mvwaddch(mw->win, i, j + 2, mw->map->data[i - 1][j + 1]); // Top-right
-//
-//				
-//				mvwaddch(mw->win, i + 1, j, mw->map->data[i][j - 1]); // Middle-left
-//				mvwaddch(mw->win, i + 1, j + 1, CHAR_TILE); // Character
-//				mvwaddch(mw->win, i + 1, j + 2, mw->map->data[i][j + 1]); // Middle-right
-//
-//				mvwaddch(mw->win, i + 2, j, mw->map->data[i + 1][j - 1]); // Bot-left
-//				mvwaddch(mw->win, i + 2, j + 1, mw->map->data[i + 1][j]); // Bot-middle
-//				mvwaddch(mw->win, i + 2, j + 2, mw->map->data[i + 1][j + 1]); // Bot-right
-//			}
-		}
-	}
+			mvwaddch(mw->win, i, j, mw->map->data[i][j]);
 
 	// show what's on the entity list
 	for (int i = mw->map->num_entities - 1; i >= 0; i--)
 	{
 		ENTITY_TYPER *ent = (ENTITY_TYPER*) mw->map->ent_list[i];
-		PLAYER *p;
-		ENEMY *e;
 		switch (ent->uid)
 		{
 			case player:
-				p = (PLAYER*) ent;
-				mvwaddch(mw->win, p->y, p->x, CHAR_TILE);
+				mvwaddch(mw->win, ent->y, ent->x, CHAR_TILE);
 				break;
 			case enemy:
-				e = (ENEMY*) ent;
-				mvwaddch(mw->win, e->y, e->x, ENEMY_TILE);
+				mvwaddch(mw->win, ent->y, ent->x, ENEMY_TILE);
 				break;
 		}
 	}
