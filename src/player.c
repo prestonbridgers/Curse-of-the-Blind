@@ -13,6 +13,7 @@ PLAYER *player_create(enum ENTITY uid, int y, int x)
 	local_player->x = x;
 	local_player->y = y;
 	local_player->isPassable = 0;
+	local_player->hp = 100;
 	return local_player;
 }
 
@@ -45,8 +46,15 @@ void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
 			{
 				p->y = dest.y;
 				p->x = dest.x;
-				// Run collision function
 			}
+
+			// Running interact functions
+			switch (ent->uid)
+			{
+				case enemy:
+					player_collides_enemy(p, ent);
+					break;
+			}	
 		}
 	}
 
@@ -57,3 +65,10 @@ void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
 	}
 }
 
+void player_collides_enemy(PLAYER *p, ENTITY_TYPER *ent)
+{
+	ENEMY *e = (ENEMY*) ent;
+	p->hp -= e->atk;
+
+	fprintf(stderr, "Player hp: %d\n", p->hp);
+}

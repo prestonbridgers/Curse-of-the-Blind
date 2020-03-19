@@ -29,6 +29,7 @@ typedef struct
 	int isPassable;
 	int x;
 	int y;
+	int atk;
 } ENEMY;
 
 typedef struct
@@ -37,6 +38,7 @@ typedef struct
 	int isPassable;
 	int x;
 	int y;
+	int hp;
 } PLAYER;
 
 typedef struct

@@ -98,14 +98,15 @@ int **map_gen_navmap(MAP *m)
  * nCurses wrapper function to create a new window in
  * association with a given map.
  *
- */ MAP_WIN *map_newwin(char *filename)
+ */
+MAP_WIN *map_newwin(char *filename)
 {
 	MAP_WIN *local_mapwin = malloc(sizeof(MAP_WIN));
 	MAP *local_map = map_load(filename);
 
 	int starty = (LINES - local_map->height) / 2;
 	int startx = (COLS - local_map->width) / 2;
-	WINDOW *local_win = newwin(local_map->height + 2, local_map->width + 2, starty, startx);
+	WINDOW *local_win = newwin(local_map->height, local_map->width, starty, startx);
 
 	local_mapwin->map = local_map;
 	local_mapwin->win = local_win;

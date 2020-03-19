@@ -7,7 +7,6 @@
 #include "core_structs.h"
 #include "enemy.h"
 #include "map.h"
-#include "menus.h"
 #include "player.h"
 #include "enemy.h"
 
@@ -31,15 +30,15 @@ int main(int argc, char *argv[])
 	noecho();
 	refresh();
 
-	// Vars
+	// Instantiating the game
 	GAME *game = malloc(sizeof(GAME));
 	game->map_win = map_newwin(MAP_PATH);
 	game->plr = player_create(player, 19, 35);
+	game->is_running = 1;
 
+	// Putting the player into the map's entity list
 	game->map_win->map->ent_list[0] = game->plr;
 	game->map_win->map->num_entities++;
-
-	game->is_running = 1;
 
 	// Creating entities
 	enemy_create(5, 5, game->map_win->map); 
@@ -48,30 +47,18 @@ int main(int argc, char *argv[])
 	enemy_create(18, 5, game->map_win->map); 
 	map_debug_print_ents(game->map_win->map);
 
-	map_show(game->map_win);
-
 	// GAME LOOP
 	char in;
-	while (game->is_running)
+	do
 	{
-		if ((in = getch()) == 'q')
-			game->is_running = 0;
-		else
-			event_handle(game, in);
-
-		// Updating enemy
-//		for (int i = 1; i <= 4; i++)
-//		{
-//			int **navmap = map_gen_navmap(game->map_win->map);
-
-//			ENEMY *e1 = (ENEMY*) game->map_win->map->ent_list[i];
-//			enemy_move_toward(e1, navmap, game->plr, game->map_win->map);
-//		}
-
 		map_show(game->map_win);
+		in = getch();
+		event_handle(game, in);
 
-		refresh();
-	}
+		if (game->plr->hp <= 0)
+			game->is_running = 0;
+
+	} while (game->is_running);
 
 	// Free memory and cleanup
 	map_destroy(game->map_win);
@@ -81,11 +68,11 @@ int main(int argc, char *argv[])
 
 void event_handle(GAME *g, char input)
 {
-	int y = g->plr->y;
-	int x = g->plr->x;
-
 	switch (input)
 	{
+		case 'q':
+			g->is_running = 0;
+			break;
 		case 'k': // up
 			player_move(g->plr, g->map_win->map, util_v2_N);
 			break;

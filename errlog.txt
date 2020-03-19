@@ -4,7 +4,3 @@ PRINTING ENTITY LIST (amount: 5):
 	Ent #2: enemy
 	Ent #3: enemy
 	Ent #4: enemy
-Player interacting with entity #3
-Player interacting with entity #1
-Player interacting with entity #4
-Player interacting with entity #2
