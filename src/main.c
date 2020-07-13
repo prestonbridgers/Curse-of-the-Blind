@@ -34,12 +34,7 @@ int main(int argc, char *argv[])
 	// Putting the player into the map's entity list
 	game->map_win->map->ent_list[0] = game->plr;
 
-	/* Creating entities
-	enemy_create(5, 5, game->map_win->map); 
-	enemy_create(1, 7, game->map_win->map); 
-	enemy_create(5, 18, game->map_win->map); 
-	enemy_create(18, 5, game->map_win->map); 
-	*/
+	// TODO: Remove following DEBUG
 	map_debug_print_ents(game->map_win->map);
 
 	// GAME LOOP
