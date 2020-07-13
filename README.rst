@@ -21,7 +21,8 @@ Test of using `a link`_.
 
 .. _a link: https://www.google.com\
 
-.. codeblock:: c
+.. code-block:: c
+
     int main(void)
     {
         for (int i = 0; i < 3; i++)
