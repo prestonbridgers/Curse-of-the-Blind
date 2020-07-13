@@ -1,7 +1,12 @@
 this is a test::
 
-of the literal block thing
-in the thing of many
-| things
+    This is a test of all 
+    of the things
+    yes and yes
+    
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Hello World\n");
+    }
 
 test over
