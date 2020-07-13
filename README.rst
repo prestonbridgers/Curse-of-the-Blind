@@ -15,8 +15,20 @@ Code:
 
 ``This is code``
 
-Test of using `links <https://www.youtube.com\`_
+Testing `Link text <https://domain.invalid/>`_
 
-Test of using 'a link'_
+Test of using `a link`_.
 
 .. _a link: https://www.google.com\
+
+.. codeblock:: c
+    int main(void)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            printf("hello world!\n");
+        }
+        return 0;
+    }
+    
+    
