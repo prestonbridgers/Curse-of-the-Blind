@@ -10,6 +10,10 @@ Welcome to Curse of the Blind's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   intro
+   usage/intro
+   tutorials/intro
+
 
 
 Indices and tables
