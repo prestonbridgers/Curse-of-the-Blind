@@ -3,6 +3,8 @@
 #include <ncurses.h>
 
 #include "map.h"
+#include "player.h"
+#include "enemy.h"
 
 MAP *map_load(char *map_path)
 { 
@@ -10,7 +12,7 @@ MAP *map_load(char *map_path)
 	MAP *local_map = malloc(sizeof(MAP));
 	local_map->height = 0;
 	local_map->width = 0;
-	local_map->num_ents = 0;
+	local_map->num_ents = 1;
 	FILE *map_fd = fopen(map_path, "r");
 	char c;
 
@@ -43,6 +45,19 @@ MAP *map_load(char *map_path)
 		}
 
 		local_map->data[i][j % local_map->width] = c;
+
+		// Checking for entities
+		switch (c)
+		{
+			case CHAR_TILE: // The player
+				//TODO
+				break;
+			case ENEMY_TILE: // The enemies
+				enemy_create(j % local_map->width, i, local_map);
+				break;
+		}
+
+	
 		j++;
 	}
 
