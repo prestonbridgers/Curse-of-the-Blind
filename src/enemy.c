@@ -25,7 +25,6 @@ void enemy_destroy(ENEMY *e)
 
 void enemy_move_toward(ENEMY *e, int **navmap, PLAYER *p, MAP *m)
 {
-	// get the path
 	int **path = ASTAR_get_path(navmap, m->height, m->width,
 										 e->x, e->y, p->x, p->y);
 	e->x = path[0][0];

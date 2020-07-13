@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /*
- * * Creates a player data structure
+ * Creates a player data structure
  * given initial xy coordinates.
  *
  */

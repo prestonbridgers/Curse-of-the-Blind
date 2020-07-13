@@ -8,7 +8,6 @@
 #include "enemy.h"
 #include "map.h"
 #include "player.h"
-#include "enemy.h"
 
 #include "a_star.h"
 
@@ -51,7 +50,7 @@ int main(int argc, char *argv[])
 		in = getch();
 		event_handle(game, in);
 
-	/* UNCOMMENT TO ENABLE ENEMY AI (UNOPTIMIZED)
+/*
 		// Getting navmap
 		int **navmap = map_gen_navmap(game->map_win->map);
 		// Moving enemies
@@ -59,7 +58,7 @@ int main(int argc, char *argv[])
 		{
 			enemy_move_toward(game->map_win->map->ent_list[i], navmap, game->plr, game->map_win->map);
 		}
-	*/
+*/
 
 		if (game->plr->hp <= 0)
 			game->is_running = 0;
