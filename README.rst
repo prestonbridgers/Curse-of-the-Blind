@@ -14,3 +14,9 @@ test over
 Code:
 
 ``This is code``
+
+Test of using `links <https://www.youtube.com\`_
+
+Test of using 'a link'_
+
+.. _a link: https://www.google.com\
