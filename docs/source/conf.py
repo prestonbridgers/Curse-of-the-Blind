@@ -93,7 +93,7 @@ html_theme_options = {
 	"sidebarbgcolor": "#3f4739",
 	"sidebartextcolor": "#ffffff",
 
-	"relbarbgcolor": "#8c692c"
+	"relbarbgcolor": "#8c692c",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
