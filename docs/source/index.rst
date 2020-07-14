@@ -14,14 +14,6 @@ Welcome to the documentation for Curse of the Blind (CotB)!
 Introduction
 ============
 
-LKSADjf;lkjsd;lkfajsda;ldjfalkdsjfa
-sdjfalksdjf
-askdjf
-alsjdf
-lasjd
-fakjs
-df
-
 .. todo::
 
 	Fill introduction section with content.

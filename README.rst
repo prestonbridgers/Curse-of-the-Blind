@@ -1,35 +1,31 @@
-this is a test::
+.. Curse of the Blind documentation master file, created by
+   sphinx-quickstart on Mon Jul 13 19:44:40 2020.
 
-    This is a test of all 
-    of the things
-    yes and yes
-    
-    for (int i = 0; i < 3; i++)
-    {
-        printf("Hello World\n");
-    }
+Curse of the Blind Documentation
+================================
 
-test over
+Welcome to the documentation for Curse of the Blind (CotB)!
 
-Code:
+Introduction
+============
 
-``This is code``
+Equipment Needed
+================
 
-Testing `Link text <https://domain.invalid/>`_
+Download
+========
 
-Test of using `a link`_.
+Installation Instructions
+=========================
 
-.. _a link: https://www.google.com\
+Code Example
+============
 
-.. code-block:: c
+FAQs
+====
 
-    int main(void)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            printf("hello world!\n");
-        }
-        return 0;
-    }
-    
-    
+Support
+=======
+
+How to Contribute
+=================
