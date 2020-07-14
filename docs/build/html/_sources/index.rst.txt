@@ -13,6 +13,7 @@ Welcome to Curse of the Blind's documentation!
    intro
    usage/intro
    tutorials/intro
+   test
 
 
 

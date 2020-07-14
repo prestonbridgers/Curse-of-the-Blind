@@ -75,13 +75,26 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'classic'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+	"rightsidebar": "false",
+	"stickysidebar": "true",
+	"collapsiblesidebar": "false",
+	"externalrefs": "false",
+
+	"footerbgcolor": "#312509",
+	"footertextcolor": "#ffffff",
+
+	"sidebarbgcolor": "#3f4739",
+	"sidebartextcolor": "#ffffff",
+
+	"relbarbgcolor": "#8c692c"
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
