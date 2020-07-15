@@ -6,7 +6,7 @@
 #include "player.h"
 #include "enemy.h"
 
-MAP *map_load(char *map_path)
+MAP *map_load(const char *map_path)
 { 
 	// Vars
 	MAP *local_map = malloc(sizeof(MAP));
@@ -44,7 +44,18 @@ MAP *map_load(char *map_path)
 			continue;
 		}
 
-		local_map->data[i][j % local_map->width] = c;
+		switch (c)
+		{
+			case EMPTY_SPACE_TILE:
+				local_map->data[i][j % local_map->width] = ' ';
+				break;
+			case ENEMY_TILE:
+				local_map->data[i][j % local_map->width] = GROUND_TILE;
+				break;
+			default:
+				local_map->data[i][j % local_map->width] = c;
+				break;
+		}
 
 		// Checking for entities
 		switch (c)
@@ -97,7 +108,7 @@ int **map_gen_navmap(MAP *m)
 	return navmap;
 }
 
-MAP_WIN *map_newwin(char *map_path)
+MAP_WIN *map_newwin(const char *map_path)
 {
 	MAP_WIN *local_mapwin = malloc(sizeof(MAP_WIN));
 	MAP *local_map = map_load(map_path);

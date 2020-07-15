@@ -1,0 +1,15 @@
+PRINTING ENTITY LIST (amount: 8):
+	Ent #0: player
+	Ent #1: enemy
+	Ent #2: enemy
+	Ent #3: enemy
+	Ent #4: enemy
+	Ent #5: enemy
+	Ent #6: enemy
+	Ent #7: enemy
+Player interacting with entity #2
+Player hp: 90
+Player interacting with entity #2
+Player hp: 80
+Player interacting with entity #2
+Player hp: 70

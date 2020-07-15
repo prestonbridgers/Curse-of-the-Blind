@@ -1,0 +1,1 @@
+1) Update documentation to reflect recent changes to the API (addition of the cotb_init(const char *map_path) function)

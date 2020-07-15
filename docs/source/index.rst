@@ -15,38 +15,55 @@ Welcome to the documentation for Curse of the Blind (CotB)!
 Introduction
 ============
 
-.. todo::
+Curse of the Blind is a project started in 2018 by `Preston Bridgers`_.
+The project began as an idea for an old-school style ASCII game.
+However, the project is now being pivoted to development as an
+ASCII game engine. This documentation contains information and
+:ref:`tutorials` to aid developers in its use.
 
-	Fill introduction section with content.
+.. _preston bridgers: https://www.linkedin.com/in/prestonbridgers
 
 Equipment Needed
 ================
 
-.. todo::
-
-	Fill equipment section with content: dependencies,
-	minimum requirements, etc.
+- A linux machine or virtual machine
 
 Download
 ========
 
-.. todo::
+Dependencies (install these first using your package
+manager of choice):
 
-	Add download links to the download section.
+- libncurses-dev
 
-Installation Instructions
-=========================
+.. note::
 
-.. todo::
+	Package names may change depending on the distribution
+	of linux you are running. Currently nCurses, the only
+	dependency, is extremely common and widely used. The
+	above package name is taken from Debian/Ubuntu/Mint
+	repositories.
 
-	Fill installation instructions with content.
+The project can be cloned from its `gitlab page`_ using the
+following command:
 
-Code Example
-============
+``git clone https://www.gitlab.com/prestonbridgers/curse-of-the-blind/``
 
-.. todo::
+.. _gitlab page: https://www.gitlab.com/prestonbridgers/curse-of-the-blind/
 
-	Fill code example section with content.
+Usage
+=====
+
+After modifying the source code however you like, compile and run
+the game by using the following command from the project's root
+directory:
+
+``cd ./src && make || make run``
+
+.. note::
+
+	The game will not run with the above command if there are errors
+	during compilation.
 
 FAQs
 ====
@@ -58,9 +75,9 @@ FAQs
 Support
 =======
 
-.. todo::
+For support of any kind, contact me at:
 
-	Add tech support and contact information to the support page.
+- prestonbridgers@gmail.com
 
 How to Contribute
 =================

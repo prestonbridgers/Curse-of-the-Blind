@@ -45,7 +45,84 @@
             
   <div class="section" id="creating-custom-maps">
 <h1>Creating Custom Maps<a class="headerlink" href="#creating-custom-maps" title="Permalink to this headline">¶</a></h1>
-<p>This is a simple process.</p>
+<p>Welcome to the tutorial for creating custom maps
+for CotB!</p>
+<div class="section" id="how-loading-maps-works">
+<h2>How Loading Maps Works<a class="headerlink" href="#how-loading-maps-works" title="Permalink to this headline">¶</a></h2>
+<p>All CotB maps are stored as raw text files. CotB reads
+each character of the map file and loads tile data.
+Loaded tiles are based on the characters in the map file.</p>
+<p>The following map characters are supported:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" rowspan="2">Char</th>
+<th class="head" rowspan="2">Tile</th>
+</tr>
+<tr class="row-even"></tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2">#</td>
+<td rowspan="2">Wall tile</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">.</td>
+<td rowspan="2">Floor tile</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">-</td>
+<td rowspan="2">Empty Space tile</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">+</td>
+<td rowspan="2">Door tile</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">e</td>
+<td rowspan="2">Enemy tile</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The floor tile character is only by convention. CotB
+recognizes any character not already taken as
+walkable floor tiles.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The player, represented by a ‘&#64;’ character, is
+<strong>always</strong> placed in the top left corner of the map.
+Do not put a ‘&#64;’ character in any map files.</p>
+</div>
+</div>
+<div class="section" id="creating-a-simple-map">
+<h2>Creating a Simple Map<a class="headerlink" href="#creating-a-simple-map" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add more robust step by step guide to creating a simple map.</p>
+</div>
+<p>Example simple map file:</p>
+<img alt="../_images/simple_map.png" src="../_images/simple_map.png" />
+</div>
+<div class="section" id="creating-a-complex-map">
+<h2>Creating a Complex Map<a class="headerlink" href="#creating-a-complex-map" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add more robust step by step guide to creating a complex map.</p>
+</div>
+<p>Creating more complex maps is also possible. In order
+to make more complex maps, you will use the Empty Space
+character which isn’t drawn to the in-game screen.</p>
+<p>Example: The following map file</p>
+<img alt="../_images/complex_map.png" src="../_images/complex_map.png" />
+<p>will be drawn to the screen as</p>
+<img alt="../_images/complex_map_rendered.png" src="../_images/complex_map_rendered.png" />
+</div>
 </div>
 
 
@@ -54,6 +131,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Creating Custom Maps</a><ul>
+<li><a class="reference internal" href="#how-loading-maps-works">How Loading Maps Works</a></li>
+<li><a class="reference internal" href="#creating-a-simple-map">Creating a Simple Map</a></li>
+<li><a class="reference internal" href="#creating-a-complex-map">Creating a Complex Map</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="tutorials.html"
                         title="previous chapter">Tutorials</a></p>

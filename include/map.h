@@ -3,7 +3,7 @@
 
 #include "core_structs.h"
 
-MAP_WIN *map_newwin(char *map_path);
+MAP_WIN *map_newwin(const char *map_path);
 void map_destroy(MAP_WIN *mw);
 void map_show(MAP_WIN *mw);
 int **map_gen_navmap(MAP *m);

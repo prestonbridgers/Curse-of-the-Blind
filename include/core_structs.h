@@ -8,6 +8,7 @@
 #define GROUND_TILE '.'
 #define WALL_TILE '#'
 #define DOOR_TILE '+'
+#define EMPTY_SPACE_TILE '-'
 
 enum ENTITY
 {

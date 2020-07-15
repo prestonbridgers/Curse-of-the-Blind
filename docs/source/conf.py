@@ -69,6 +69,8 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
 
+# Changing default syntax highlighting language
+highlight_language = 'c'
 
 # -- Options for HTML output -------------------------------------------------
 
