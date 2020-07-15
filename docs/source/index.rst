@@ -19,7 +19,7 @@ Curse of the Blind is a project started in 2018 by `Preston Bridgers`_.
 The project began as an idea for an old-school style ASCII game.
 However, the project is now being pivoted to development as an
 ASCII game engine. This documentation contains information and
-:ref:`tutorials` to aid developers in its use.
+:ref:`tutorials <tutorials>` to aid developers in its use.
 
 .. _preston bridgers: https://www.linkedin.com/in/prestonbridgers
 
@@ -27,6 +27,8 @@ Equipment Needed
 ================
 
 - A linux machine or virtual machine
+
+.. _dl:
 
 Download
 ========

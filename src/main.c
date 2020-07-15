@@ -11,8 +11,6 @@
 
 #include "a_star.h"
 
-#define MAP_PATH "../maps/map-2.txt"
-
 void event_handle(GAME *g, char input);
 GAME *cotb_init(const char *map_path);
 
@@ -24,7 +22,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	GAME *game = cotb_init(MAP_PATH);
+	GAME *game = cotb_init(argv[1]);
 
 	// TODO: Remove following DEBUG
 	map_debug_print_ents(game->map_win->map);
