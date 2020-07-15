@@ -24,7 +24,7 @@ copyright = '2020, Preston Bridgers'
 author = 'Preston Bridgers'
 
 # The short X.Y version
-version = ''
+version = '0.1'
 # The full version, including alpha/beta/rc tags
 release = '0.1'
 
@@ -186,6 +186,8 @@ epub_title = project
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
+# Shows the "Show Source" link on the sidebar if True
+html_show_sourcelink = False
 
 # -- Extension configuration -------------------------------------------------
 

@@ -9,6 +9,7 @@ Welcome to the documentation for Curse of the Blind (CotB)!
 .. toctree::
    :maxdepth: 2
 
+   tutorials/tutorials
    todos
 
 Introduction
