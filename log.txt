@@ -6,19 +6,19 @@ Player interacting with entity #2
 Player hp: 90
 Player interacting with entity #2
 Player hp: 80
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 70
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 60
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 50
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 40
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 30
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 20
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 10
-Player interacting with entity #1
+Player interacting with entity #2
 Player hp: 0
