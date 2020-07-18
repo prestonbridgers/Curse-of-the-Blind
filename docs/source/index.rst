@@ -56,16 +56,67 @@ following command:
 Usage
 =====
 
+Quickstart Boilerplate
+----------------------
+
+The following is the boilerplate /src/main.c file that comes with
+the project :ref:`download <dl>`.
+
+.. code-block:: c
+        
+        #include "cotb.h"
+
+        #include <stdio.h>
+        #include <ncurses.h>
+
+        int main(int argc, char *argv[])
+        {
+	        // vars
+	        GAME *game;
+
+	        // Verifying arguments have been passed
+	        if (argc < 2)
+	        {
+		        printf("Usage:\n\t./curse {./map/path}\n");
+		        exit(1);
+	        }
+
+	        // Initializing CotB
+	        game = cotb_init(argv[1]);
+
+	        // GAME LOOP
+	        char in;
+	        do
+	        {
+		        map_show(game->map_win);
+
+		        in = getch();
+
+                        /*
+                         * This function is also in the
+                         * /src/main.c file, but has been
+                         * excluded from this example
+                         * because it is too long.
+                        */
+		        event_handle(game, in);
+
+		        if (game->plr->hp <= 0)
+			        game->is_running = 0;
+	        } while (game->is_running);
+
+	        // Cleanup
+	        map_destroy(game->map_win);
+	        endwin();
+	        return 0;
+        }
+
+Compilation and Running
+-----------------------
+
 After modifying the source code however you like, compile and run
-the game by using the following command from the project's root
-directory:
+the game by running the run.sh script located at /src/run.sh
 
-``cd ./src && make || make run``
-
-.. note::
-
-	The game will not run with the above command if there are errors
-	during compilation.
+``./run.sh name_of_map.txt``
 
 FAQs
 ====
@@ -84,9 +135,9 @@ For support of any kind, contact me at:
 How to Contribute
 =================
 
-.. todo::
-
-	Add content to the how to contribute section.
+Developers feel free to clone the repo and submit a pull request with
+changes and additions. Please update the documentation to reflect any
+proposed changes. No coding style guidelines are in place as of now.
 
 Licensing
 =========

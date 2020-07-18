@@ -9,6 +9,5 @@
 #include "a_star.h"
 
 GAME *cotb_init(const char *map_path);
-void event_handle(GAME *g, char input);
 
 #endif

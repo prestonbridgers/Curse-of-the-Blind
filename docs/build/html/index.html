@@ -87,14 +87,68 @@ following command:</p>
 </div>
 <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="quickstart-boilerplate">
+<h2>Quickstart Boilerplate<a class="headerlink" href="#quickstart-boilerplate" title="Permalink to this headline">¶</a></h2>
+<p>The following is the boilerplate /src/main.c file that comes with
+the project <a class="reference internal" href="#dl"><span class="std std-ref">download</span></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cotb.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ncurses.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+        <span class="c1">// vars</span>
+        <span class="n">GAME</span> <span class="o">*</span><span class="n">game</span><span class="p">;</span>
+
+        <span class="c1">// Verifying arguments have been passed</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage:</span><span class="se">\n\t</span><span class="s">./curse {./map/path}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Initializing CotB</span>
+        <span class="n">game</span> <span class="o">=</span> <span class="n">cotb_init</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+        <span class="c1">// GAME LOOP</span>
+        <span class="kt">char</span> <span class="n">in</span><span class="p">;</span>
+        <span class="k">do</span>
+        <span class="p">{</span>
+                <span class="n">map_show</span><span class="p">(</span><span class="n">game</span><span class="o">-&gt;</span><span class="n">map_win</span><span class="p">);</span>
+
+                <span class="n">in</span> <span class="o">=</span> <span class="n">getch</span><span class="p">();</span>
+
+                <span class="cm">/*</span>
+<span class="cm">                 * This function is also in the</span>
+<span class="cm">                 * /src/main.c file, but has been</span>
+<span class="cm">                 * excluded from this example</span>
+<span class="cm">                 * because it is too long.</span>
+<span class="cm">                */</span>
+                <span class="n">event_handle</span><span class="p">(</span><span class="n">game</span><span class="p">,</span> <span class="n">in</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">game</span><span class="o">-&gt;</span><span class="n">plr</span><span class="o">-&gt;</span><span class="n">hp</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">game</span><span class="o">-&gt;</span><span class="n">is_running</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">game</span><span class="o">-&gt;</span><span class="n">is_running</span><span class="p">);</span>
+
+        <span class="c1">// Cleanup</span>
+        <span class="n">map_destroy</span><span class="p">(</span><span class="n">game</span><span class="o">-&gt;</span><span class="n">map_win</span><span class="p">);</span>
+        <span class="n">endwin</span><span class="p">();</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compilation-and-running">
+<h2>Compilation and Running<a class="headerlink" href="#compilation-and-running" title="Permalink to this headline">¶</a></h2>
 <p>After modifying the source code however you like, compile and run
-the game by using the following command from the project’s root
-directory:</p>
-<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">./src</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">||</span> <span class="pre">make</span> <span class="pre">run</span></code></p>
+the game by running the run.sh script located at /src/run.sh</p>
+<p><code class="docutils literal notranslate"><span class="pre">./run.sh</span> <span class="pre">name_of_map.txt</span></code></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The game will not run with the above command if there are errors
 during compilation.</p>
+</div>
 </div>
 </div>
 <div class="section" id="faqs">
@@ -151,7 +205,11 @@ SOFTWARE.</p>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#equipment-needed">Equipment Needed</a></li>
 <li><a class="reference internal" href="#download">Download</a></li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#quickstart-boilerplate">Quickstart Boilerplate</a></li>
+<li><a class="reference internal" href="#compilation-and-running">Compilation and Running</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#faqs">FAQs</a></li>
 <li><a class="reference internal" href="#support">Support</a></li>
 <li><a class="reference internal" href="#how-to-contribute">How to Contribute</a></li>
