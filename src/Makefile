@@ -7,10 +7,10 @@ ODIR=./obj
 
 LIBS=-lncurses -la_star
 
-_DEPS= player.h map.h menus.h util.h core_structs.h enemy.h
+_DEPS= player.h map.h menus.h util.h core_structs.h enemy.h cotb.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = player.o map.o menus.o util.o main.o enemy.o
+_OBJ = player.o map.o menus.o util.o main.o enemy.o cotb.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c $(DEPS)
