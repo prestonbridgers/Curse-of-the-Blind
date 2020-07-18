@@ -48,6 +48,8 @@ Creating a Simple Map
 The following instructions will create a simple map file
 containing one room with some enemies:
 
+.. _map creation steps:
+
 1) Navigate to the /map directory in the project files (see
    :ref:`downloads <dl>`)
 2) Create a raw text file, for example ``custom_map.txt``
@@ -76,15 +78,23 @@ Creating a Complex Map
 .. todo::
 	
 	Add more robust step by step guide to creating a complex map.
+        Add figures for these instructions.
 
 Creating more complex maps is also possible with the use
-of the Empty Space tiles (see :ref:`tile table <tile table>`).
+of the Empty Space tiles (see :ref:`tile table <tile table>`). Use
+the following instructions to create a complex map:
 
-Example: The following map file
+1) Following steps 1 & 2 from the :ref:`above simple map creation
+   tutorial <map creation steps>`
+2) Fill as much room as is needed with the Empty Space tiles
+3) Paint the desired room/rooms with the characters listed above
+   (see :ref:`tile table <tile table>`). Example:
+4) Execute the run script in the /src directory passing
+   the name of your map from step 1.
 
-.. image:: ./res/complex_map.png
+   ``./run custom_map.txt``
 
-will be drawn to the screen as
-
-.. image:: ./res/complex_map_rendered.png
+   Result:
+  
+   .. image:: ./res/complex_map_rendered.png
 
