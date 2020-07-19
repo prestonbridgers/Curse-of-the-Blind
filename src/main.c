@@ -1,7 +1,10 @@
 #include "cotb.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ncurses.h>
+
+void event_handle(GAME *g, char input);
 
 int main(int argc, char *argv[])
 {

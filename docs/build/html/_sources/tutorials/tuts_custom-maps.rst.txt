@@ -87,8 +87,14 @@ the following instructions to create a complex map:
 1) Following steps 1 & 2 from the :ref:`above simple map creation
    tutorial <map creation steps>`
 2) Fill as much room as is needed with the Empty Space tiles
+
+   .. image:: ./res/complex_map_1.png
+
 3) Paint the desired room/rooms with the characters listed above
    (see :ref:`tile table <tile table>`). Example:
+
+   .. image:: ./res/complex_map_2.png
+
 4) Execute the run script in the /src directory passing
    the name of your map from step 1.
 
@@ -96,5 +102,5 @@ the following instructions to create a complex map:
 
    Result:
   
-   .. image:: ./res/complex_map_rendered.png
+   .. image:: ./res/complex_map_3.png
 

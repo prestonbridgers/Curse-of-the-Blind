@@ -67,7 +67,10 @@ the project :ref:`download <dl>`.
         #include "cotb.h"
 
         #include <stdio.h>
+        #include <stdlib.h>
         #include <ncurses.h>
+
+        void event_handle(GAME *g, char input);
 
         int main(int argc, char *argv[])
         {
@@ -118,11 +121,6 @@ the game by running the run.sh script located at /src/run.sh
 
 ``./run.sh name_of_map.txt``
 
-.. note::
-
-	The game will not run with the above command if there are errors
-	during compilation.
-
 FAQs
 ====
 
@@ -140,9 +138,9 @@ For support of any kind, contact me at:
 How to Contribute
 =================
 
-.. todo::
-
-	Add content to the how to contribute section.
+Developers feel free to clone the repo and submit a pull request with
+changes and additions. Please update the documentation to reflect any
+proposed changes. No coding style guidelines are in place as of now.
 
 Licensing
 =========
