@@ -124,9 +124,11 @@ the game by running the run.sh script located at /src/run.sh
 FAQs
 ====
 
-.. todo::
+This section will be updated with frequently asked questions from both
+users and developers. See the :any:`support` section below
+for issues not in this section.
 
-	Add FAQs to the FAQs section.
+.. _support:
 
 Support
 =======
