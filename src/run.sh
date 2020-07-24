@@ -6,4 +6,4 @@ if [[ -z "$1" ]]; then
 	exit 1
 fi
 
-make && ./curse ../maps/$1 2> ../log.txt
+make clean && make && ./curse ../maps/$1 2> ../log.txt
