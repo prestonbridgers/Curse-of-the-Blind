@@ -1,5 +1,2 @@
 autorun.sh
-docker-build-dev.sh
-kill.sh
 log.txt
-/docs
