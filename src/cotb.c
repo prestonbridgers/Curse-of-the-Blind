@@ -19,7 +19,7 @@ GAME *cotb_init(const char *map_path)
 	game->is_running = 1;
 
 	// Adding player to the map's entity list
-	game ->map_win->map->ent_list[0] = game->plr;
+	game->map_win->map->ent_list[0] = game->plr;
 
 	return game;
 }
