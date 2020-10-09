@@ -22,7 +22,7 @@ curse: $(OBJ)
 .PHONY: clean run
 
 run:
-	./curse 2> ../errlog.txt
+	./curse ../maps/map-1.txt 2> ../errlog.txt
 
 clean:
 	rm $(ODIR)/*.o
