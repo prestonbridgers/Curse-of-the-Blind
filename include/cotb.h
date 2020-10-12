@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "map.h"
 #include "player.h"
+#include "util.h"
 
 #include "a_star.h"
 

@@ -1,3 +1,5 @@
+#include "core_structs.h"
+
 #ifndef UTIL_H_INCLUDED
 #define UTIL_H_INCLUDED
 
@@ -6,6 +8,8 @@ typedef struct
 	int x;
 	int y;
 } VECTOR2;
+
+void util_update_hp_bar(GAME *g);
 
 VECTOR2 util_v2_NW(VECTOR2 v);
 VECTOR2 util_v2_N(VECTOR2 v);

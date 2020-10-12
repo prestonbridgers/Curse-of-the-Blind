@@ -13,7 +13,7 @@ PLAYER *player_create(enum ENTITY uid, int x, int y)
 	local_player->x = x;
 	local_player->y = y;
 	local_player->is_passable = 0;
-	local_player->hp = 100;
+	local_player->hp = 10;
 	return local_player;
 }
 
@@ -54,10 +54,15 @@ void player_move(PLAYER *p, MAP *m, VECTOR2 (*move_func)(VECTOR2))
 				case enemy:
 					player_collides_enemy(p, ent);
 					break;
+                case player:
+                    break;
+                default:
+                    break;
 			}	
 		}
 	}
 
+    // IF: No enemy encountered and destination is not a wall tile
 	if (!encountered_entity && m->data[dest.y][dest.x] != WALL_TILE)
 	{
 		p->y = dest.y;

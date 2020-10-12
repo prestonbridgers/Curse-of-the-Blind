@@ -1,0 +1,20 @@
+Player interacting with entity #3
+Player hp: 9
+Player interacting with entity #3
+Player hp: 8
+Player interacting with entity #3
+Player hp: 7
+Player interacting with entity #3
+Player hp: 6
+Player interacting with entity #3
+Player hp: 5
+Player interacting with entity #3
+Player hp: 4
+Player interacting with entity #3
+Player hp: 3
+Player interacting with entity #3
+Player hp: 2
+Player interacting with entity #3
+Player hp: 1
+Player interacting with entity #3
+Player hp: 0

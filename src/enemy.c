@@ -13,7 +13,7 @@ void enemy_create(int x, int y, MAP *m)
 	e->x = x;
 	e->y = y;
 	e->is_passable = 0;
-	e->atk = 10;
+	e->atk = 1;
 
 	m->ent_list[m->num_ents++] = e;
 }

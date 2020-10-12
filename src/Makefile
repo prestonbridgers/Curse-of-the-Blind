@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I$(IDIR) -L$(LDIR)
+CFLAGS=-I$(IDIR) -L$(LDIR) -lpthread
 
 IDIR=../include
 LDIR=../lib

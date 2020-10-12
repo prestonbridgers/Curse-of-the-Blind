@@ -22,17 +22,19 @@ int main(int argc, char *argv[])
 	game = cotb_init(argv[1]);
 
     // Creating navmap for pathfinding
-    int **navmap = map_gen_navmap(game->map_win->map);
+    //int **navmap = map_gen_navmap(game->map_win->map);
 
 	// GAME LOOP
 	char in;
 	do
 	{
 		map_show(game->map_win);
+        util_update_hp_bar(game);
 
-        // Applying pathfinding to enemies
+        /*// Applying pathfinding to enemies
         for (int i = 1; i < game->map_win->map->num_ents; i++)
             enemy_move_toward(game->map_win->map->ent_list[i], navmap, game->plr, game->map_win->map);
+        */
 
 		in = getch();
 		event_handle(game, in);
