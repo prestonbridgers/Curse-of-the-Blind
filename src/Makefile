@@ -1,11 +1,11 @@
 CC=gcc
-CFLAGS=-I$(IDIR) -L$(LDIR) -lpthread
+CFLAGS= -c -I$(IDIR)
 
 IDIR=../include
 LDIR=../lib
 ODIR=./obj
 
-LIBS=-lncurses -la_star
+LIBS= -L$(LDIR) -lncurses -la_star
 
 _DEPS= player.h map.h menus.h util.h core_structs.h enemy.h cotb.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
@@ -14,10 +14,10 @@ _OBJ = player.o map.o menus.o util.o main.o enemy.o cotb.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) $< $(CFLAGS) -o $@
 
 curse: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) $(OBJ) $(LIBS) -o $@ 
 
 .PHONY: clean run
 
