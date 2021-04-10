@@ -13,10 +13,6 @@ ASCII game engine.
 
 .. _preston bridgers: https://www.linkedin.com/in/prestonbridgers
 
-For more detailed documentation please see the `project website`_.
-
-.. _project website: https://student2.cs.appstate.edu/bridgerspc/cotb
-
 Equipment Needed
 ================
 
